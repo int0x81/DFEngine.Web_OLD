@@ -22,10 +22,10 @@
       <div class="mr-3">
         <app-darkmode-toggle></app-darkmode-toggle>
       </div>
-      <div class="info-button-wrapper">
+      <div *ngIf="!smDevice" class="info-button-wrapper">
         <app-github-button></app-github-button>
       </div>
-      <div class="info-button-wrapper">
+      <div *ngIf="!smDevice" class="info-button-wrapper">
         <app-info-button></app-info-button>
       </div>
       <!-- <div class="mr-2">
