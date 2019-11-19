@@ -1,0 +1,21 @@
+<div *ngIf="subscription != null && !subscription.isCanceled" class="d-flex flex-column align-items-center m-2">
+    <div class="align-self-center m-3"
+        style="width: 80px; height: 80px; border-style: solid; border-color: #808080; border-width: 1px; background-image: radial-gradient(#76b900 5%, #FFFFFF 60%);">
+    </div>
+    <p>You subscription renews at {{subscription.validUntil | date:'longDate'}}</p>
+    <button class="btn btn-outline-danger" type="button" (click)="onCancelButtonClick()">Cancel</button>
+</div>
+<div *ngIf="subscription == null" class="d-flex flex-column align-items-center m-2">
+    <div class="m-3"
+        style="width: 80px; height: 80px; border-style: solid; border-color: #808080; border-width: 1px; background-image: radial-gradient(#b9001f 5%, #FFFFFF 60%);">
+    </div>
+    <p>You do not have an active subscription</p>
+    <button class="btn btn-outline-success" type="button" (click)="onSubscribeClick()">Subscribe</button>
+</div>
+<div *ngIf="subscription != null && subscription.isCanceled" class="d-flex flex-column align-items-center m-2">
+    <div class="align-self-center m-3"
+        style="width: 80px; height: 80px; border-style: solid; border-color: #808080; border-width: 1px; background-image: radial-gradient(#ece802 5%, #FFFFFF 60%);">
+    </div>
+    <p>You subscription expiring at {{subscription.validUntil | date:'longDate'}}</p>
+    <button class="btn btn-outline-success" type="button" (click)="onRenewButtonClick()">Renew</button>
+</div>

@@ -1,0 +1,31 @@
+trigger:
+
+- master
+
+jobs:
+- deployment:
+  displayName: Build image and apply changes to prod environment
+  pool:
+    vmImage: 'ubuntu-latest'
+  environment: df-prod
+  variables:
+    dockerId: dfengine
+    imageName: df-web
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        
+        - script: |
+            docker login -u dfengine -p $(dockerPassword) dfengine.azurecr.io
+            docker build -t dfengine.azurecr.io/df-web:prod --build-arg NG_ENVIRONMENT=production .
+            docker push dfengine.azurecr.io/df-web:prod    
+
+        - task: KubernetesManifest@0
+          displayName: Deploy manifest
+          inputs:
+            action: deploy
+            namespace: df-prod
+            kubernetesServiceConnection: df-prod-df-engine-aks-df-prod-1571077760081
+            manifests: df-web-test.yml  
+            containers: dfengine.azurecr.io/df-web:prod

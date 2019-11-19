@@ -1,0 +1,15 @@
+.df-sign-up-btn {
+    background-color: #0099ff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 8px;
+    box-shadow: 0 0 4px #424242;
+    transition: box-shadow .2s ease-in-out;
+    z-index: 2;
+}
+
+.df-sign-up-btn:hover {
+    box-shadow: 0 0 14px #000000;
+    cursor: pointer;
+}

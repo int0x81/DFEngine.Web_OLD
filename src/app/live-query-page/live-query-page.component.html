@@ -1,0 +1,17 @@
+<div [ngClass]="cookiesAccepted ? '' : 'start-up-mode'" style="display: flex; flex-direction: column; min-height: 93vh;">
+    <div id="renderingBox" style="overflow: hidden; position: relative;  flex-grow: 1;">
+        <app-rendering-area></app-rendering-area>
+    </div>
+    <div class="w-100 darktheme-bg-dp2" style="justify-self: flex-end;">
+        <div class="df-resize-bar"></div>
+        <div class="d-lg-flex align-items-end m-0 w-100">
+            <div class="m-0 p-0 w-100">
+                <app-editor></app-editor>
+            </div>
+            <div class="p-0 m-0">
+                <app-ad-banner></app-ad-banner>
+                <app-credit></app-credit>
+            </div>
+        </div>
+    </div>
+</div>

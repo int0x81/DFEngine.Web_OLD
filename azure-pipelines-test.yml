@@ -1,0 +1,32 @@
+trigger:
+
+- development
+
+jobs:
+- deployment:
+  displayName: Build image and apply changes to test environment
+  pool:
+    vmImage: 'ubuntu-latest'
+  environment: df-test
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+
+        - script: docker build -t dfengine.azurecr.io/df-web:test --build-arg NG_ENVIRONMENT=test .
+          displayName: Building image
+
+        - script: docker login -u dfengine -p $(dockerPassword) dfengine.azurecr.io
+          displayName: Login to container registry
+        
+        - script: docker push dfengine.azurecr.io/df-web:test
+          displayName: Pushing image to container registry
+
+        - task: KubernetesManifest@0
+          displayName: Deploy manifest
+          inputs:
+            action: deploy
+            namespace: df-test
+            kubernetesServiceConnection: df-test-df-engine-aks-df-test-1571077375419
+            manifests: df-web-test.yml  
+            containers: dfengine.azurecr.io/df-web:test

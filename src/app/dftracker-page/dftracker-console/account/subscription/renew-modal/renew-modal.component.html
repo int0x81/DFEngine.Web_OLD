@@ -1,0 +1,13 @@
+<div [ngClass]="darkTheme ? 'darktheme-bg-dp3' : ''">
+        <div class="modal-header">
+            <h4 class="modal-title">Please review your Payment Details</h4>
+            <!-- the following input exist to get rid of the ngBootstrap autofocus issue: https://stackoverflow.com/questions/53613974/angular7-and-ngbmodal-how-to-remove-default-auto-focus-->
+            <input type="text" style="display:none" />
+        </div>
+        <div class="modal-body">
+            <h5>Payment Details</h5>
+        </div>
+        <div class="d-flex justify-content-center modal-footer">
+            <button type="button" class="btn btn-outline-success" (click)="onRenew()">Confirm Renew</button>
+        </div>
+</div>

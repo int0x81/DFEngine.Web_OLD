@@ -1,0 +1,15 @@
+<div [ngClass]="[darkTheme ? 'selector-dark-theme' : 'selector-classic-theme', collapsed ? 'selector-collapsed' : 'selector-expanded']"
+    class="selector">
+    <ul class="list-unstyled">
+        <div>
+            <li *ngFor="let tech of technologies" (click)="onSelectorClick(tech)">
+                <div class="selector-item">
+                    <p [ngClass]="[darkTheme ? 'selector-text-dark-theme' : 'selector-text-classic-theme']" style="margin: 0px;">{{tech.name}}</p>
+                    <div *ngIf="tech.status == 3" style="position: absolute; right: 4px; top: -1px;">
+                        <p class="selector-item-preview-text">Soon</p>
+                    </div>
+                </div>
+            </li>
+        </div>  
+    </ul>
+</div>

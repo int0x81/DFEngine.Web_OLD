@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: df-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: df-web
+  template:
+    metadata:
+      labels:
+        app: df-web
+    spec:
+      containers:
+      - name: df-web
+        image: dfengine.azurecr.io/df-web:prod
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        volumeMounts:
+        - name: secretvol
+          mountPath: "/etc/secretvol"
+          readOnly: true
+      volumes:
+      - name: secretvol
+        secret:
+          secretName: df-ssl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: df-web-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: df-web
+  ports:
+  - port: 80
+    name: http
+    protocol: TCP
+    targetPort: 80
+  - port: 443
+    name: https
+    protocol: TCP
+    targetPort: 443
