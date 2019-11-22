@@ -30,7 +30,8 @@
             "styles": [
               "src/styles/main.sass",
               "node_modules/noty/lib/noty.css",
-              "node_modules/noty/lib/themes/metroui.css"
+              "node_modules/noty/lib/themes/metroui.css",
+              "node_modules/highlight.js/styles/atom-one-dark.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true,
@@ -113,7 +114,8 @@
             "styles": [
               "src/styles/main.sass",
               "node_modules/noty/lib/noty.css",
-              "node_modules/noty/lib/themes/metroui.css"
+              "node_modules/noty/lib/themes/metroui.css",
+              "node_modules/highlight.js/styles/atom-one-dark.css"
             ],
             "scripts": [],
             "assets": [

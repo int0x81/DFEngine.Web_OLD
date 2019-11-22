@@ -1,11 +1,41 @@
 <div [ngClass]="darkTheme ? 'darktheme-bg-dp4' : ''" class="df-info-modal">
    <h1>DFEngine</h1>
-   <p>The free-to-use SQL visualization tool. DFEngine visualizes the data flows of your SQL on column level</p>
-   <br>
-   <h5>Upcoming Features:</h5>
-   <ul>
-       <li>Implement MERGE-statement resolution</li>
-       <li>New syntax Flavor: PL/SQL</li>
-       <li>Syntax highlighting</li>
-   </ul>
+   <p>The free-to-use SQL visualization tool</p>
+   <img style="padding-top: 10px;" src="https://dev.azure.com/finnpersonalserver/DFEngine.Server/_apis/build/status/Production?branchName=master">
+   <div style="align-self: flex-start; padding-top: 40px;">
+      <h5>DFEngine turns your SQL from</h5>
+      <pre style="padding-top: 20px;"><code #code class="sql">
+        USE stagingdb;
+
+        INSERT INTO dbo.Coworkers
+        SELECT
+        hashBytes ('MD5', cast(ID as varchar)),
+        ID as CountryID,
+        Name as CountryName,
+        NameEN as CountryNameEN,
+        Nationality,
+        Code 	as CountryCode,
+        'UZT' as	tRSRC,
+        @LoadRun as	ExecTime,
+        getDate() as	tValidFrom,
+        convert (datetime, '2999-12-31', 121) as ud,
+        1 as tIsLastRecord       
+        FROM [ApplicationDB].[dbo].Coworkers s
+        WHERE s.Type = 'Manager'
+        AND s.tLastRecord = 0;
+        --------------------------
+        SELECT * FROM dbo.Coworkers
+      </code></pre>
+      <h5 style="padding-bottom: 20px;">into</h5>
+      <img *ngIf="darkTheme" src="/assets/dt-cropped.png">
+      <img *ngIf="!darkTheme" src="/assets/ct-cropped.png"> 
+   </div>
+   <div style="align-self: flex-start; padding-top: 60px;">
+    <h5>Upcoming Features:</h5>
+    <ul>
+        <li>Implement MERGE-statement resolution</li>
+        <li>New syntax Flavor: PL/SQL</li>
+        <li>Syntax highlighting</li>
+    </ul>
+   </div>
 </div>
