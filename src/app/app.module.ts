@@ -34,6 +34,8 @@ import { InfoModalComponent } from './navbar/info-modal/info-modal.component';
 import { GitHubButtonComponent } from './navbar/github-button/github-button.component';
 import { WebGLHelperService } from './_services/implementations/webglhelper.service';
 import { StatusLogoComponent } from './live-query-page/rendering-area/status-logo/status-logo.component';
+import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-opener.component';
+import { DynamicRenderingBackgroundComponent } from './live-query-page/rendering-area/dynamic-rendering-background/dynamic-rendering-background.component';
 
 @NgModule({
     imports: [
@@ -66,7 +68,9 @@ import { StatusLogoComponent } from './live-query-page/rendering-area/status-log
         InfoButtonComponent,
         InfoModalComponent,
         GitHubButtonComponent,
-        StatusLogoComponent
+        StatusLogoComponent,
+        MobileNavOpenerComponent,
+        DynamicRenderingBackgroundComponent
     ],
     bootstrap: [ AppComponent ],
     providers: [ 

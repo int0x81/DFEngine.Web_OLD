@@ -12,7 +12,7 @@ import { GREService } from './gre.service';
 
 @Component({ 
     selector: 'app-gre', 
-    template: '',
+    template: '<div id="renderingBox"></div>',
     styleUrls: []
 })
 export class GREComponent implements OnInit, AfterViewInit, OnDestroy {

@@ -23,10 +23,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {}
 
-  openMobileNavbar() {
-    //open navbar
-  }
-
   ngOnDestroy() {
     this.breakpointSubscription.unsubscribe();
   }

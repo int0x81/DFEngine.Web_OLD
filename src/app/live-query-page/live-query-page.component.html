@@ -1,11 +1,10 @@
-<div [ngClass]="cookiesAccepted ? '' : 'start-up-mode'" style="display: flex; flex-direction: column; height: 93vh;">
-    <div id="renderingBox" style="overflow: hidden; position: relative;  flex-grow: 1; min-height: 50vh;">
+<div [ngClass]="cookiesAccepted ? '' : 'start-up-mode'" class="df-live-query-page">
+    <div class="rendering-area-wrapper">
         <app-rendering-area></app-rendering-area>
     </div>
-    <div class="w-100 darktheme-bg-dp2" style="justify-self: flex-end;">
-        <div class="df-resize-bar"></div>
-        <div class="d-lg-flex align-items-end m-0 w-100">
-            <div class="m-0 p-0 w-100">
+    <div class="darktheme-bg-dp2 df-editor-area">
+        <div class="d-lg-flex align-items-end m-0">
+            <div style="flex-grow: 1;">
                 <app-editor></app-editor>
             </div>
             <div class="p-0 m-0">

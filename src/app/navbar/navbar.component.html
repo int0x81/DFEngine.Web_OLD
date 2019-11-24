@@ -1,39 +1,32 @@
 <div class="d-flex justify-content-between df-nav">
 
-    <div class="d-flex ml-3">
-      <app-interactive-logo class="align-self-center"></app-interactive-logo>
-      <div class="align-self-center pl-3 pt-2">
+    <div class="d-flex ml-3 align-items-center">
+      <app-interactive-logo></app-interactive-logo>
+      <div class="pl-3 pt-2">
         <h3 class="text-white" routerLink="/livequery" style="cursor: pointer;"><b>DFEngine</b></h3>
       </div>
-      <div *ngIf="!smDevice" class="d-flex justify-content-beginn ml-4">
-        <div class="align-self-center df-nav-link-container">
-          <a class="df-nav-link" routerLink="/livequery" routerLinkActive="link-active">LiveQuery</a>
+      <div *ngIf="!smDevice" class="d-flex align-items-center justify-content-beginn df-nav-item-group">
+        <div class="df-nav-item-begin">
+          <a class="df-nav-link" routerLink="/livequery" routerLinkActive="df-link-active">LiveQuery</a>
         </div>
-        <div class="align-self-center df-nav-link-container">
-          <a class="df-nav-link" routerLink="/multifile" routerLinkActive="link-active">MultiFile</a>
+        <div class="df-nav-item-end">
+          <a class="df-nav-link" routerLink="/multifile" routerLinkActive="df-link-active">MultiFile</a>
         </div>
       </div>
     </div>
 
-    <div *ngIf="!smDevice" class="d-flex align-items-center">
-      <div class="mr-3">
+    <div *ngIf="!smDevice" class="d-flex align-items-center df-nav-item-group">
+      <div class="df-nav-item-begin">
         <app-darkmode-toggle></app-darkmode-toggle>
       </div>
-      <div class="info-button-wrapper">
+      <div class="df-nav-item-between">
         <app-github-button></app-github-button>
       </div>
-      <div class="info-button-wrapper">
+      <div class="df-nav-item-end">
         <app-info-button></app-info-button>
       </div>
     </div>
-    <div *ngIf="smDevice" class="info-button-wrapper">
-      <div class="info-point" (click)="openMobileNavbar()">
-        <svg width="42" height="42" viewBox="0 0 20 20">
-          <path fill="#FFFFFF" d="M17.5 6h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
-          <path fill="#FFFFFF" d="M17.5 11h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
-          <path fill="#FFFFFF" d="M17.5 16h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
-        </svg>
-      </div>
-      
+    <div *ngIf="smDevice" class="df-nav-item-container df-nav-item-group">
+      <app-mobile-nav-opener></app-mobile-nav-opener>
     </div>
 </div>

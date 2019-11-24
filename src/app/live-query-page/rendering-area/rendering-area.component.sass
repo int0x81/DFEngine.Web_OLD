@@ -1,11 +1,22 @@
 @import '~src/styles/main.sass'
 
-.df-spinner 
-    width: 80px
-    height: 80px
-    border-width: 8px
-    color: $df-prime
+.renderingArea
+    position: relative
+    display: flex
+    flex-direction: column
+    height: 100%
+    overflow: hidden
 
+.df-rendering-background
+    position: absolute
+    overflow: hidden
+
+.notification-container
+    position: absolute 
+    z-index: 10
+    bottom: 10px
+    right: 10px
+    width: 200px
 
 .df-error-alert 
     z-index: 5

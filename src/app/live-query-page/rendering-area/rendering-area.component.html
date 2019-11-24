@@ -1,22 +1,23 @@
-<app-gre class="m-0 p-0 w-100 h-100 rendering-area"></app-gre>
+<div class="renderingArea">
+    <app-gre></app-gre>
 
-<div id="notyContainer" style="position: absolute; z-index: 10; bottom: 10px; right: 10px; width: 200px;"></div>
-
-<div *ngIf="!loadingLandscape && !textboxFilled" style="position: absolute; top:40%; left:0; width: 100%;">
-    <div class="d-flex flex-column align-items-center mt-4">
-        <app-status-logo></app-status-logo>
-        <h4 class="mt-3">Awaiting your SQL</h4>
+    <div class="df-rendering-background">
+        <app-dynamic-rendering-background></app-dynamic-rendering-background>
     </div>
-</div>
 
-<div *ngIf="!loadingLandscape && textboxFilled && !webGLSupported" style="position: absolute; top:40%; left:0; width: 100%;">
-    <div class="d-flex flex-column align-items-center mt-4">
-        <h4>Sadly your browser does not support WebGL. We recommend using Chrome or Firefox</h4>
+    <div id="notyContainer" class="notification-container"></div>
+
+    <div *ngIf="!loadingLandscape && !textboxFilled" style="position: absolute; top:40%; left:0; width: 100%;">
+        <div class="d-flex flex-column align-items-center mt-4">
+            <app-status-logo></app-status-logo>
+            <h4 class="mt-3">Awaiting your SQL</h4>
+        </div>
     </div>
-</div>
 
-<div *ngIf="loadingLandscape" style="position: absolute; top: 46%; left: 49.5%;">
-    <div class="spinner-border df-spinner" role="status">
-        <span class="sr-only df-spinner">Loading...</span>
+    <div *ngIf="!loadingLandscape && textboxFilled && !webGLSupported"
+        style="position: absolute; top:40%; left:0; width: 100%;">
+        <div class="d-flex flex-column align-items-center mt-4">
+            <h4>Your browser does not support WebGL. We recommend using Firefox</h4>
+        </div>
     </div>
 </div>

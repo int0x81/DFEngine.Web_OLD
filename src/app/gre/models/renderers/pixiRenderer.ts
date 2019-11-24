@@ -13,17 +13,10 @@ export class PixiRenderer implements IRenderer {
 
     constructor(divElement: HTMLDivElement, darkThemeInit: boolean) {
 
-        PIXI.utils.skipHello();
-        
-        let initialBackground: number;
-
-        if(darkThemeInit)
-          initialBackground = 0x121212;
-        else
-          initialBackground = 0xFFFFFF;
+        PIXI.utils.skipHello(); //prevents the standart PIXI console output
 
         this.renderer = new PIXI.Renderer({width: divElement.clientWidth, height: divElement.clientHeight - 6, 
-        backgroundColor: initialBackground, resolution: window.devicePixelRatio, autoDensity: true, antialias: true});
+        transparent: true, resolution: window.devicePixelRatio, autoDensity: true, antialias: true});
         
         window.addEventListener('resize', () => {
 
@@ -42,19 +35,17 @@ export class PixiRenderer implements IRenderer {
         .drag({
             wheel: false
         })
-        .wheel({ //due to a bug, the zooming function is deactived. The bug triggered a zoom event, even if the pointer was outside the canvas
+        .wheel({
             percent: 0.1,
             smooth: 5,
         });
-
-        this.clear(darkThemeInit);
         
         divElement.appendChild(this.renderer.view);
     }
 
     render(graph: Graph, darkTheme: boolean): void {
 
-        this.clear(darkTheme);
+        this.clear();
         let graphContainer = new PIXI.Container();
  
         graph.renderWebGL(graphContainer, darkTheme);
@@ -68,7 +59,7 @@ export class PixiRenderer implements IRenderer {
 
     update(graph: Graph, darkTheme: boolean): void {
 
-        this.clear(darkTheme);
+        this.clear();
         let graphContainer = new PIXI.Container();
         
         graph.updateWebGL(graphContainer, darkTheme);
@@ -80,26 +71,11 @@ export class PixiRenderer implements IRenderer {
         this.ticker.start();
     }
 
-    clear(darkTheme: boolean): void {
+    clear(): void {
 
         this.ticker.stop();
         this.renderer.clear();
         this.viewport.removeChildren();
-
-        if(darkTheme)
-          this.renderer.backgroundColor = 0x121212;
-        else
-          this.renderer.backgroundColor = 0xFFFFFF;
-
-        let placeholder: PIXI.Sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-        
-        if(darkTheme)
-            placeholder.tint = 0x121212;
-
-        placeholder.width = this.renderer.width;
-        placeholder.height = this.renderer.height;
-        
-        this.renderer.render(placeholder, undefined, true);
     }
 
     resize(width: number, height: number): void {
