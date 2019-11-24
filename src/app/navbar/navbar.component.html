@@ -1,29 +1,39 @@
-<div class="d-flex justify-content-between df-nav" style="height: 7vh;">
+<div class="d-flex justify-content-between df-nav">
 
     <div class="d-flex ml-3">
       <app-interactive-logo class="align-self-center"></app-interactive-logo>
       <div class="align-self-center pl-3 pt-2">
         <h3 class="text-white" routerLink="/livequery" style="cursor: pointer;"><b>DFEngine</b></h3>
       </div>
-      <div class="d-flex justify-content-beginn ml-4">
-        <div class="align-self-center">
-          <a class="nav-link text-light" routerLink="/livequery" routerLinkActive="active">LiveQuery</a>
+      <div *ngIf="!smDevice" class="d-flex justify-content-beginn ml-4">
+        <div class="align-self-center df-nav-link-container">
+          <a class="df-nav-link" routerLink="/livequery" routerLinkActive="link-active">LiveQuery</a>
         </div>
-        <div class="align-self-center">
-          <a class="nav-link text-light" routerLink="/multifile" routerLinkActive="active">MultiFile</a>
+        <div class="align-self-center df-nav-link-container">
+          <a class="df-nav-link" routerLink="/multifile" routerLinkActive="link-active">MultiFile</a>
         </div>
       </div>
     </div>
 
-    <div class="d-flex align-items-center">
+    <div *ngIf="!smDevice" class="d-flex align-items-center">
       <div class="mr-3">
         <app-darkmode-toggle></app-darkmode-toggle>
       </div>
-      <div *ngIf="!smDevice" class="info-button-wrapper">
+      <div class="info-button-wrapper">
         <app-github-button></app-github-button>
       </div>
-      <div *ngIf="!smDevice" class="info-button-wrapper">
+      <div class="info-button-wrapper">
         <app-info-button></app-info-button>
       </div>
+    </div>
+    <div *ngIf="smDevice" class="info-button-wrapper">
+      <div class="info-point" (click)="openMobileNavbar()">
+        <svg width="42" height="42" viewBox="0 0 20 20">
+          <path fill="#FFFFFF" d="M17.5 6h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
+          <path fill="#FFFFFF" d="M17.5 11h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
+          <path fill="#FFFFFF" d="M17.5 16h-15c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h15c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z"></path>
+        </svg>
+      </div>
+      
     </div>
 </div>

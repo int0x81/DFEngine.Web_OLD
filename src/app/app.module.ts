@@ -33,6 +33,7 @@ import { InfoButtonComponent } from './navbar/info-button/info-button.component'
 import { InfoModalComponent } from './navbar/info-modal/info-modal.component';
 import { GitHubButtonComponent } from './navbar/github-button/github-button.component';
 import { WebGLHelperService } from './_services/implementations/webglhelper.service';
+import { StatusLogoComponent } from './live-query-page/rendering-area/status-logo/status-logo.component';
 
 @NgModule({
     imports: [
@@ -64,7 +65,8 @@ import { WebGLHelperService } from './_services/implementations/webglhelper.serv
         CookiePolicyPageComponent,
         InfoButtonComponent,
         InfoModalComponent,
-        GitHubButtonComponent
+        GitHubButtonComponent,
+        StatusLogoComponent
     ],
     bootstrap: [ AppComponent ],
     providers: [ 
