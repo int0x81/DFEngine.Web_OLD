@@ -7,6 +7,7 @@ import { LiveQueryService } from 'src/app/_services/implementations/livequery.se
 import { RenderingTechnology } from 'src/app/gre/renderingTechnology';
 import { GREService } from 'src/app/gre/gre.service';
 import * as Noty from 'noty';
+import { WebGLHelperService } from 'src/app/_services/implementations/webglhelper.service';
 
 @Component({
   selector: 'app-rendering-area',
@@ -20,12 +21,15 @@ export class RenderingAreaComponent implements OnInit, OnDestroy {
   liveQueryService: LiveQueryServiceDefinition;
   loadingLandscape: boolean = false;
   textboxFilled: boolean = false;
+  webGLSupported: boolean;
 
-  constructor(liveQueryServiceImpl: LiveQueryService, private greService: GREService) { 
+  constructor(liveQueryServiceImpl: LiveQueryService, private greService: GREService, private webglHelper: WebGLHelperService) { 
     this.liveQueryService = liveQueryServiceImpl;
   }
 
   ngOnInit() {
+
+    this.webGLSupported = this.webglHelper.isWebGLSupported();
 
     this.querySubscription = this.liveQueryService.newQuerySubject.subscribe(async (query) => {
 

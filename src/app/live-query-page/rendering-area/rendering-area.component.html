@@ -9,6 +9,12 @@
     </div>
 </div>
 
+<div *ngIf="!loadingLandscape && textboxFilled && !webGLSupported" style="position: absolute; top:40%; left:0; width: 100%;">
+    <div class="d-flex flex-column align-items-center mt-4">
+        <h4>Sadly your browser does not support WebGL. We recommend using Chrome or Firefox</h4>
+    </div>
+</div>
+
 <div *ngIf="loadingLandscape" style="position: absolute; top: 46%; left: 49.5%;">
     <div class="spinner-border df-spinner" role="status">
         <span class="sr-only df-spinner">Loading...</span>
