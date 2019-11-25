@@ -11,7 +11,7 @@ export class PixiRenderer implements IRenderer {
 
     private viewport: Viewport;
 
-    constructor(divElement: HTMLDivElement, darkThemeInit: boolean) {
+    constructor(divElement: HTMLDivElement) {
 
         PIXI.utils.skipHello(); //prevents the standart PIXI console output
 
@@ -52,6 +52,7 @@ export class PixiRenderer implements IRenderer {
 
         this.viewport.addChild(graphContainer);
 
+        this.ticker.stop();
         this.ticker = new PIXI.Ticker();
         this.ticker.add(() => this.renderer.render(this.viewport));
         this.ticker.start();
@@ -66,6 +67,7 @@ export class PixiRenderer implements IRenderer {
         
         this.viewport.addChild(graphContainer);
 
+        this.ticker.stop();
         this.ticker = new PIXI.Ticker();
         this.ticker.add(() => this.renderer.render(this.viewport));
         this.ticker.start();
@@ -73,9 +75,12 @@ export class PixiRenderer implements IRenderer {
 
     clear(): void {
 
-        this.ticker.stop();
         this.renderer.clear();
         this.viewport.removeChildren();
+        this.ticker.stop();
+        this.ticker = new PIXI.Ticker();
+        this.ticker.add(() => this.renderer.render(this.viewport));
+        this.ticker.start();
     }
 
     resize(width: number, height: number): void {

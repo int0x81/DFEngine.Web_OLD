@@ -49,7 +49,7 @@ export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.graph = new Graph();
         
-        this.renderer = new PixiRenderer(renderingArea, this.darkTheme);
+        this.renderer = new PixiRenderer(renderingArea);
     }
 
     /**
@@ -66,8 +66,8 @@ export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
      * Clears the current graph that is beeing displayed
      */
     clear(): void {
-        this.graph = new Graph();
-        this.renderer.clear(this.darkTheme);
+        this.graph = new Graph(); 
+        this.renderer.clear();
     }
 
     /**

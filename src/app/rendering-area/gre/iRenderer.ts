@@ -17,9 +17,8 @@ export interface IRenderer {
 
     /**
      * Replaces the current rendered object with a placeholder
-     * @param darkTheme states if the placeholder shall be rendered in darkTheme
      */
-    clear(darkTheme: boolean): void;
+    clear(): void;
 
     /**
      * Resizes the renderer

@@ -25,7 +25,7 @@ export class D3Renderer implements IRenderer {
         throw new Error("Method not implemented.");
     }
 
-    clear(darkTheme: boolean) {
+    clear() {
         throw new Error("Method not implemented.");
     }
 
