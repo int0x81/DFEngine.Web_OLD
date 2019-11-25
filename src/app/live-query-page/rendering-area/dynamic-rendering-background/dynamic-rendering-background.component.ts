@@ -21,8 +21,7 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
 

@@ -1,25 +1,28 @@
 @import '~src/styles/main.sass'
 
 .cookie-info-card
-
     padding: 20px
     // border-radius: 14px
     box-shadow: 0 0 20px #808080
 
 .accept-cookie-btn
-    width: 120px
-    padding-top: 5px
-    padding-left: 12px
-    padding-bottom: 5px
-    border-radius: 8px
     background-color: $df-prime
-    cursor: pointer
+    color: #000000
 
 .disagree-cookie-btn
+    background-color: #656565
+    color: #e3e3e3
+
+.df-cookie-info-btn
     width: 120px
     padding-top: 5px
     padding-left: 12px
     padding-bottom: 5px
     border-radius: 8px
-    background-color: #656565
-    cursor: pointer    
+    font-weight: 500
+    cursor: pointer
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.2), 0 3px 7px 0 rgba(0,0,0,0.2)
+    transition-duration: 0.4s
+
+.df-cookie-info-btn:hover
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2)
