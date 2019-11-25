@@ -3,14 +3,12 @@ import { StatusLogoComponent } from './status-logo/status-logo.component';
 import { DynamicRenderingBackgroundComponent } from './dynamic-rendering-background/dynamic-rendering-background.component';
 import { GREComponent } from './gre/gre.component';
 import { RenderingAreaService } from './services/rendering-area.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { RenderingAreaComponent } from './rendering-area.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
-        BrowserModule
+        CommonModule
     ],
     declarations: [
         RenderingAreaComponent,
