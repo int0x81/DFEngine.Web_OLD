@@ -4,8 +4,8 @@ import { LiveQueryMock } from 'src/app/_services/mocks/livequery.service.mock';
 import { Landscape } from 'src/app/_models/landscape';
 import { Subscription } from 'rxjs';
 import { LiveQueryService } from 'src/app/_services/implementations/livequery.service';
-import { RenderingTechnology } from 'src/app/gre/renderingTechnology';
-import { GREService } from 'src/app/gre/gre.service';
+import { RenderingTechnology } from './gre/renderingTechnology';
+import { RenderingAreaService } from './services/rendering-area.service';
 import * as Noty from 'noty';
 import { WebGLHelperService } from 'src/app/_services/implementations/webglhelper.service';
 
@@ -23,7 +23,7 @@ export class RenderingAreaComponent implements OnInit, OnDestroy {
   textboxFilled: boolean = false;
   webGLSupported: boolean;
 
-  constructor(liveQueryServiceImpl: LiveQueryService, private greService: GREService, private webglHelper: WebGLHelperService) { 
+  constructor(liveQueryServiceImpl: LiveQueryService, private greService: RenderingAreaService, private webglHelper: WebGLHelperService) { 
     this.liveQueryService = liveQueryServiceImpl;
   }
 

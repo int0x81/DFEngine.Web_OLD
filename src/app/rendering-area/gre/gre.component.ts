@@ -5,14 +5,13 @@ import { IRenderer } from "./iRenderer";
 import { D3Renderer } from "./models/renderers/d3Renderer";
 import { PixiRenderer } from "./models/renderers/pixiRenderer";
 import { Subscription } from "rxjs";
-import { DarkThemeService } from '../_services/implementations/darktheme.service';
-import { LiveQueryMock } from '../_services/mocks/livequery.service.mock';
-import { LiveQueryServiceDefinition } from '../_services/livequery.service.def';
-import { GREService } from './gre.service';
+import { DarkThemeService } from '../../_services/implementations/darktheme.service';
+//import { LiveQueryServiceDefinition } from '../_services/livequery.service.def';
+import { RenderingAreaService } from '../services/rendering-area.service';
 
 @Component({ 
     selector: 'app-gre', 
-    template: '<div id="renderingBox"></div>',
+    templateUrl: 'gre.component.html',
     styleUrls: []
 })
 export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -25,10 +24,8 @@ export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
     private darkThemeSubscription: Subscription;
     private newLandscapeSubscription: Subscription;
     private clearLandscapeSubscription: Subscription;
-    // private resizeSubscription: Subscription;
-    // private newSelectionSubscription: Subscription;
 
-    constructor(private darkThemeService: DarkThemeService, private greService: GREService) { }
+    constructor(private darkThemeService: DarkThemeService, private greService: RenderingAreaService) { }
 
     ngOnInit() {
         
