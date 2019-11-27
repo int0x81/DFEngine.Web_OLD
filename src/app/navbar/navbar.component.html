@@ -1,36 +1,32 @@
-<div class="d-flex justify-content-between df-nav" style="height: 7vh;">
+<div class="d-flex justify-content-between df-nav">
 
-    <div class="d-flex ml-3">
-      <app-interactive-logo class="align-self-center"></app-interactive-logo>
-      <div class="align-self-center pl-3 pt-2">
+    <div class="d-flex ml-3 align-items-center">
+      <app-interactive-logo></app-interactive-logo>
+      <div class="pl-3 pt-2">
         <h3 class="text-white" routerLink="/livequery" style="cursor: pointer;"><b>DFEngine</b></h3>
       </div>
-      <!-- <div class="d-flex justify-content-beginn ml-4">
-        <div class="align-self-center">
-          <a class="nav-link text-light" routerLink="/livequery" routerLinkActive="active">DF LiveQuery</a>
+      <div *ngIf="!smDevice" class="d-flex align-items-center justify-content-beginn df-nav-item-group">
+        <div class="df-nav-item-begin">
+          <a class="df-nav-link" routerLink="/livequery" routerLinkActive="df-link-active">LiveQuery</a>
         </div>
-        <div class="align-self-center" style="position: relative;">
-          <a class="nav-link text-light" routerLink="/dftracker" routerLinkActive="active">DF Tracker</a>
-          <div style="position: absolute; right: 0; top: 0;">
-            <p class="text-danger" style="font-size: 11px;">Soon</p>
-          </div>
+        <div class="df-nav-item-end">
+          <a class="df-nav-link" routerLink="/multifile" routerLinkActive="df-link-active">MultiFile</a>
         </div>
-      </div> -->
+      </div>
     </div>
 
-    <div class="d-flex align-items-center">
-      <div class="mr-3">
+    <div *ngIf="!smDevice" class="d-flex align-items-center df-nav-item-group">
+      <div class="df-nav-item-begin">
         <app-darkmode-toggle></app-darkmode-toggle>
       </div>
-      <div class="info-button-wrapper">
+      <div class="df-nav-item-between">
         <app-github-button></app-github-button>
       </div>
-      <div class="info-button-wrapper">
+      <div class="df-nav-item-end">
         <app-info-button></app-info-button>
       </div>
-      <!-- <div class="mr-2">
-        <app-nav-options></app-nav-options>
-      </div> -->
     </div>
-
+    <div *ngIf="smDevice" class="df-nav-item-container df-nav-item-group">
+      <app-mobile-nav-opener></app-mobile-nav-opener>
+    </div>
 </div>

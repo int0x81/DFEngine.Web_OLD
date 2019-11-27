@@ -14,23 +14,16 @@ import { CookieInfoComponent } from './cookie-info/cookie-info.component';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-    private readonly MAX_SUPPORTED_WIDTH: number = 668;
-
     private layoutChangeSubscription: Subscription;
     private darkThemeSubscription: Subscription;
 
-    smDevice: boolean = false;
     cookiesAccepted: boolean;
     darkTheme: boolean;
 
-    constructor(breakpointObserver: BreakpointObserver, darkThemeService: DarkThemeService) {
+    constructor(darkThemeService: DarkThemeService) {
 
         this.darkTheme = darkThemeService.getDarkThemeState();
         this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
-
-        this.smDevice = breakpointObserver.isMatched('(max-width: ' + this.MAX_SUPPORTED_WIDTH + 'px)');
-        this.layoutChangeSubscription = breakpointObserver.observe('(max-width: ' + this.MAX_SUPPORTED_WIDTH + 'px)')
-            .subscribe(result => this.smDevice = result.matches);
     }
 
     ngOnInit(): void { }

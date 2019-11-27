@@ -1,5 +1,5 @@
 <div style="position: relative;">
-    <app-tech-selector style="position: absolute; top: 20px; right: 20px;"></app-tech-selector>
-    <textarea placeholder="Enter some SQL here..." spellcheck="false" autofocus autocomplete="off" [ngClass]="darkTheme ? 'df-editor-darktheme' : 'df-editor-classictheme'" class="df-editor" [(ngModel)]="textEditorContent" (ngModelChange)="onEditorChange()">
+    <app-tech-selector style="position: absolute; top: 10px; right: 20px;"></app-tech-selector>
+    <textarea placeholder="Enter some SQL here..." spellcheck="false" autofocus autocomplete="off" [ngClass]="[darkTheme ? 'df-editor-darktheme' : 'df-editor-classictheme']" class="df-editor" [(ngModel)]="textEditorContent" (ngModelChange)="onEditorChange()">
     </textarea>
 </div>
