@@ -1,10 +1,5 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { LiveQueryServiceDefinition } from 'src/app/_services/livequery.service.def';
-import { LiveQueryMock } from 'src/app/_services/mocks/livequery.service.mock';
-import { Landscape } from 'src/app/_models/landscape';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LiveQueryService } from 'src/app/_services/implementations/livequery.service';
-import { RenderingTechnology } from './gre/renderingTechnology';
 import { RenderingAreaService } from './services/rendering-area.service';
 import * as Noty from 'noty';
 import { WebGLHelperService } from 'src/app/_services/implementations/webglhelper.service';
@@ -16,47 +11,24 @@ import { WebGLHelperService } from 'src/app/_services/implementations/webglhelpe
 })
 export class RenderingAreaComponent implements OnInit, OnDestroy {
   
-  private querySubscription: Subscription;
-
-  liveQueryService: LiveQueryServiceDefinition;
+  private landscapeSubscription: Subscription;
   loadingLandscape: boolean = false;
-  textboxFilled: boolean = false;
+  
   webGLSupported: boolean;
 
-  constructor(liveQueryServiceImpl: LiveQueryService, private greService: RenderingAreaService, private webglHelper: WebGLHelperService) { 
-    this.liveQueryService = liveQueryServiceImpl;
-  }
+  constructor(private renderingAreaService: RenderingAreaService, private webglHelper: WebGLHelperService) {}
 
   ngOnInit() {
 
     this.webGLSupported = this.webglHelper.isWebGLSupported();
 
-    this.querySubscription = this.liveQueryService.newQuerySubject.subscribe(async (query) => {
+    this.landscapeSubscription = this.renderingAreaService.renderLandscapeSubject.subscribe((landscape) => {
 
-      if(query.query.length == 0) {
-        this.greService.clearGRESubject.next();
-        this.textboxFilled = false;
-        return;
-      }
-
-      this.textboxFilled = true;
-
-      this.loadingLandscape = true;
-      await this.liveQueryService.getLandscape(query).then((l) => {
-
-        for(let warning of l.warnings)
-          this.showWarning(warning);
-
-        for(let error of l.errors)
-          this.showError(error);
-
-        if(l.graph != null)
-          this.greService.renderGraphSubject.next(l.graph);
-
-      }, 
-      (r) => { this.showError("Unable to reach API"); }
-      ).finally(() => this.loadingLandscape = false);
- 
+      for(let warning of landscape.warnings)
+        this.showWarning(warning);
+    
+      for(let error of landscape.errors)
+        this.showError(error);
     });
   }
 
@@ -89,6 +61,6 @@ export class RenderingAreaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.querySubscription.unsubscribe();
+    this.landscapeSubscription.unsubscribe();
   }
 }

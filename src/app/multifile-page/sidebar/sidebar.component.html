@@ -1,9 +1,22 @@
 <div [ngClass]="darkTheme ? 'darktheme-bg-dp2' : ''" class="df-multifile-sidebar">
-    <p class="df-sidebar-header">File Selection</p>
     <div class="df-file-catalog-wrapper">
-
+        <app-file-catalog></app-file-catalog>
+    </div>
+    <div class="df-sidebar-options">
+        <div class="df-sidebar-option">
+            <p style="margin: 0px">Technology</p>
+            <app-tech-selector></app-tech-selector>
+        </div>
+        <div class="df-sidebar-option">
+            <p style="margin: 0px">ColumnLevel</p>
+            <div class="df-secondary-toggle">
+                <input type="checkbox" class="df-secondary-check" [checked]="showColumns" (change)="onShowOptionsChange()">
+                <b class="df-secondary-switch"></b>
+                <b class="df-secondary-track"></b>
+            </div>
+        </div>
     </div>
     <div class="df-ad-area">
-        <p>ADS</p>
+        <!-- <p>ADS</p> -->
     </div>
 </div>

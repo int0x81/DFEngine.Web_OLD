@@ -1,0 +1,7 @@
+<div class="df-file-selection-item">
+    <label class="df-checkbox-container">
+        <input type="checkbox" [checked]="selected" (change)="onCheckBoxChange()">
+        <span class="checkmark"></span>
+    </label>
+    <p class="df-file-name">{{sqlFile.name.substr(0, sqlFile.name.length - 4)}}</p>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import anime from 'animejs/lib/anime.es.js';
+import { RenderingAreaService } from '../services/rendering-area.service';
 
 @Component({
   selector: 'app-status-logo',
@@ -10,8 +11,13 @@ import anime from 'animejs/lib/anime.es.js';
 })
 export class StatusLogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  show: boolean = true;
+
   private darkTheme: boolean;
   private darkThemeSubscription: Subscription;
+
+  private clearRenderingAreaSubscription: Subscription;
+  private renderLandscapeSubscription: Subscription;
 
   private logoDBody: HTMLElement;
   private logoFPart: HTMLElement;
@@ -19,38 +25,29 @@ export class StatusLogoComponent implements OnInit, AfterViewInit, OnDestroy {
   private logoLowerCircle: HTMLElement;
 
   private animation: any;
-  private originColor: string;
   
-  constructor(darkThemeService: DarkThemeService) { 
+  constructor(darkThemeService: DarkThemeService, renderingAreaService: RenderingAreaService) { 
 
     this.darkTheme = darkThemeService.getDarkThemeState();
 
-    this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => {
-      
-      this.darkTheme = !this.darkTheme;
-
-      // anime.remove(this.logoTopCircle);
-      // anime.remove(this.logoLowerCircle);
-
-      // this.playAnimation(this.darkTheme);
-    });
+    this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
+    this.clearRenderingAreaSubscription = renderingAreaService.clearGRESubject.subscribe(() => this.show = true);
+    this.renderLandscapeSubscription = renderingAreaService.renderLandscapeSubject.subscribe(() => this.show = false);
   }
 
   ngOnInit() { }
 
   ngAfterViewInit() {
 
-    let statuslogo = document.getElementById('statuslogo');
+    // let statuslogo = document.getElementById('statuslogo');
 
-    this.logoDBody = document.getElementById('slogo-d-body');
-    this.logoFPart = document.getElementById('slogo-f-part');
-    this.logoTopCircle = document.getElementById('slogo-top-circle');
-    this.logoLowerCircle = document.getElementById('slogo-lower-circle');
-
-    //this.playAnimation(this.darkTheme);
+    // this.logoDBody = document.getElementById('slogo-d-body');
+    // this.logoFPart = document.getElementById('slogo-f-part');
+    // this.logoTopCircle = document.getElementById('slogo-top-circle');
+    // this.logoLowerCircle = document.getElementById('slogo-lower-circle');
   }
 
-  playAnimation(darkTheme: boolean) {
+  private playAnimation(darkTheme: boolean) {
     
     this.animation = anime.timeline({
       easing: 'easeInQuad',
@@ -89,10 +86,11 @@ export class StatusLogoComponent implements OnInit, AfterViewInit, OnDestroy {
         fill: '#000000'
       });
     }
-    
   }
 
   ngOnDestroy() {
     this.darkThemeSubscription.unsubscribe();
+    this.clearRenderingAreaSubscription.unsubscribe();
+    this.renderLandscapeSubscription.unsubscribe();
   }
 }

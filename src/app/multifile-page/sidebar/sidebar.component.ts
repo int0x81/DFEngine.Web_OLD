@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
 
+  showColumns: boolean = false;
   darkTheme: boolean;
   private darkThemeSubscription: Subscription;
 
@@ -21,6 +22,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+  }
+
+  onShowOptionsChange() {
+    //render new graph
+    console.log(this.showColumns);
   }
 
   ngOnDestroy() {

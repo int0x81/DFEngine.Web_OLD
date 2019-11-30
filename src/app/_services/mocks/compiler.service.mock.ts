@@ -1,14 +1,8 @@
-import { LiveQueryServiceDefinition } from '../livequery.service.def';
 import { Landscape } from 'src/app/_models/landscape';
-import { Subject } from 'rxjs';
-import { LiveQueryRequest } from 'src/app/_models/livequeryrequest';
-import { Technology } from 'src/app/_models/technology';
+import { CompilerServiceDefinition } from '../compiler.service.def';
+import { CompilerRequest } from 'src/app/_models/compilerRequest';
 
-export class LiveQueryMock implements LiveQueryServiceDefinition {
-
-    private selectedTechnology: Technology;
-
-    newQuerySubject: Subject<LiveQueryRequest> = new Subject<LiveQueryRequest>();
+export class CompilerServiceMock implements CompilerServiceDefinition {
 
     private readonly TEST_GRAPH: any =
         {
@@ -102,17 +96,10 @@ export class LiveQueryMock implements LiveQueryServiceDefinition {
         warnings: new Array<string>()
     }
 
-    getLandscape(request: LiveQueryRequest): Promise<Landscape> {
+    compile(request: CompilerRequest): Promise<any> {
         
         return new Promise<Landscape>((resolve) => setTimeout(() => {
             resolve(this.landscape);
         }, Math.random() * 3000));
-    }
-    
-    getSelectedTechnology(): Technology {
-        return this.selectedTechnology;
-    }
-    selectTechnology(tech: Technology) {
-        this.selectedTechnology = tech;
     }
 }

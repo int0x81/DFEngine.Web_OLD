@@ -1,15 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { async } from '@angular/core/testing';
-import { LiveQueryServiceDefinition } from 'src/app/_services/livequery.service.def';
-import { LiveQueryMock } from 'src/app/_services/mocks/livequery.service.mock';
 import { TechnologyMock } from 'src/app/_services/mocks/technology.service.mock';
 import { TechnologyServiceDefinition } from 'src/app/_services/technology.service.def';
 import { Technology } from 'src/app/_models/technology';
-import { LiveQueryRequest } from 'src/app/_models/livequeryrequest';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
-import { LiveQueryService } from 'src/app/_services/implementations/livequery.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CompilerService } from 'src/app/_services/implementations/compiler.service';
+import { CompilerServiceDefinition } from 'src/app/_services/compiler.service.def';
+import { CompilerRequest } from 'src/app/_models/compilerRequest';
+import { CompilerOptionsService } from 'src/app/_services/implementations/compileroptions.service';
+import { RenderingAreaService } from 'src/app/rendering-area/services/rendering-area.service';
+import { DataSource } from 'src/app/_models/dataSource';
 
 @Component({
   selector: 'app-editor',
@@ -18,7 +20,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class EditorComponent implements OnInit, OnDestroy {
 
-  private liveQueryService: LiveQueryServiceDefinition;
+  private compilerService: CompilerServiceDefinition;
   darkTheme: boolean;
   private darkThemeSubscription: Subscription;
 
@@ -37,8 +39,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   private isWriting: boolean = false;
   private lastChange: number = null; //milliseconds
 
-  constructor(liveQueryServiceImpl: LiveQueryService, darkThemeService: DarkThemeService, breakpointObserver: BreakpointObserver) {
-    this.liveQueryService = liveQueryServiceImpl;
+  constructor(compilerServiceImpl: CompilerService, private compilerOptionsService: CompilerOptionsService, darkThemeService: DarkThemeService, 
+    private renderingAreaService: RenderingAreaService, breakpointObserver: BreakpointObserver) {
+    this.compilerService = compilerServiceImpl;
     this.darkTheme = darkThemeService.getDarkThemeState();
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
 
@@ -65,13 +68,27 @@ export class EditorComponent implements OnInit, OnDestroy {
         }));
       };
 
-      let request: LiveQueryRequest = {
-        query: this.textEditorContent,
-        technologyId: this.liveQueryService.getSelectedTechnology().id
-      }
+      if(this.textEditorContent == null || this.textEditorContent.length == 0)
+        this.renderingAreaService.clearGRESubject.next();
+      else {
 
-      if(this.textEditorContent != null)
-        this.liveQueryService.newQuerySubject.next(request);
+        this.renderingAreaService.loadingStateSubject.next();
+
+        let request: CompilerRequest = {
+          technologyId: this.compilerOptionsService.selectedTechnology.id,
+          columnLevel: this.compilerOptionsService.compileColumnLevel,
+          dataSources: [
+            {
+              name: "LiveQueryTool",
+              content: this.textEditorContent
+            }
+          ]
+        }
+
+        await this.compilerService.compile(request).then((landscape) => {
+          this.renderingAreaService.renderLandscapeSubject.next(landscape);
+        }, () => console.error("Unable to get result from API"));
+      }
       
       this.isWriting = false;
     }

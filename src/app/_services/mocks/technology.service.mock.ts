@@ -1,6 +1,5 @@
 import { TechnologyServiceDefinition } from '../technology.service.def';
 import { Technology } from 'src/app/_models/technology';
-import { TrackingOptionField } from 'src/app/_models/trackingoptionfield';
 
 import * as localForage from 'localforage';
 
@@ -22,20 +21,6 @@ export class TechnologyMock implements TechnologyServiceDefinition {
         name: "SQL",
         status: 3,
         description: "The standart Structured Query Language"
-    }
-
-    optionField_01: TrackingOptionField = {
-        id: "34457680",
-        name: "Server Name",
-        type: "textbox",
-        description: "The MS SQL Server on which the scripts are executed against"
-    }
-
-    optionField_02: TrackingOptionField = {
-        id: "34557680",
-        name: "Database Name",
-        type: "textbox",
-        description: "The database on which the scripts are executed against"
     }
 
     constructor() {
@@ -65,27 +50,6 @@ export class TechnologyMock implements TechnologyServiceDefinition {
             }).then(() => {
                 resolve(allTechnologies);
             });  
-        });
-    }
-
-    getOptionFields(technologyId: string): Promise<TrackingOptionField[]> {
-
-        let optionFields: TrackingOptionField[];
-
-        if(technologyId == this.technology_01.id) {
-            
-            optionFields = [
-                this.optionField_01,
-                this.optionField_02
-            ];
-        } else
-            optionFields = new Array<TrackingOptionField>();
-        
-
-        return new Promise<TrackingOptionField[]>((resolve) => {
-            setTimeout(() => {
-                resolve(optionFields);
-            }, Math.random() * 2000);
         });
     }
 }

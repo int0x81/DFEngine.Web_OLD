@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
         RenderingAreaComponent
     ],
     bootstrap: [],
-    providers: [ RenderingAreaService ],
+    providers: [ ],
     entryComponents: [ ]
 })
 /**

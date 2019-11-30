@@ -5,10 +5,8 @@ import { TechnologyMock } from 'src/app/_services/mocks/technology.service.mock'
 import { GlobalEventService } from 'src/app/_services/implementations/globalevent.service';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
-import { LiveQueryMock } from 'src/app/_services/mocks/livequery.service.mock';
-import { LiveQueryServiceDefinition } from 'src/app/_services/livequery.service.def';
 import { TechnologyService } from 'src/app/_services/implementations/technology.service';
-import { LiveQueryService } from 'src/app/_services/implementations/livequery.service';
+import { CompilerOptionsService } from 'src/app/_services/implementations/compileroptions.service';
 
 @Component({
   selector: 'app-tech-selector',
@@ -23,15 +21,13 @@ export class TechSelectorComponent implements OnInit, OnDestroy {
   collapsed: boolean = true;
 
   private techService: TechnologyServiceDefinition;
-  private liveQueryService: LiveQueryServiceDefinition;
   technologies: Technology[] = new Array<Technology>();
   selectedTechnology: Technology;
 
-  constructor(techServiceImpl: TechnologyService, private globalEventService: GlobalEventService, darkThemeService: DarkThemeService, liveQueryServiceImpl: LiveQueryService) {
+  constructor(techServiceImpl: TechnologyService, darkThemeService: DarkThemeService, private compilerOptionsService: CompilerOptionsService) {
     this.darkTheme = darkThemeService.getDarkThemeState();
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
     this.techService = techServiceImpl;
-    this.liveQueryService = liveQueryServiceImpl;
    }
 
   async ngOnInit() {
@@ -44,7 +40,7 @@ export class TechSelectorComponent implements OnInit, OnDestroy {
     this.fillTechnologyArray(technologiesInCache);
 
     if(this.technologies.length > 0)
-      this.liveQueryService.selectTechnology(this.technologies[0]);
+      this.compilerOptionsService.selectedTechnology = this.technologies[0];
   }
 
   onSelectorClick(newValue: Technology) {

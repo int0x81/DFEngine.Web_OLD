@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RenderingAreaModule } from './rendering-area/rendering-area.module';
+import { DFComponentsModule } from './components/df-components.module';
 
 import { AppComponent }  from './app.component';
 import { PageNotFoundComponent } from './page-not-found/pagenotfound.component';
@@ -15,13 +16,10 @@ import { AdBannerComponent } from './live-query-page/ad-banner/ad-banner.compone
 import { CreditComponent } from './live-query-page/credit/credit.component';
 import { EditorComponent } from './live-query-page/editor/editor.component';
 import { TermsOfServicePageComponent } from './terms-of-service-page/terms-of-service-page.component';
-import { GlobalEventService } from './_services/implementations/globalevent.service';
 import { DarkThemeService } from './_services/implementations/darktheme.service';
 import { InteractiveLogoComponent } from './navbar/interactive-logo/interactive-logo.component';
-import { TechSelectorComponent } from './live-query-page/editor/tech-selector/tech-selector.component';
 import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 import { TechnologyService } from './_services/implementations/technology.service';
-import { LiveQueryService } from './_services/implementations/livequery.service';
 import { CookieInfoComponent } from './cookie-info/cookie-info.component';
 import { CookieService } from './_services/implementations/cookie.service';
 import { CookiePolicyPageComponent } from './cookie-policy-page/cookie-policy-page.component';
@@ -30,6 +28,9 @@ import { InfoModalComponent } from './navbar/info-modal/info-modal.component';
 import { GitHubButtonComponent } from './navbar/github-button/github-button.component';
 import { WebGLHelperService } from './_services/implementations/webglhelper.service';
 import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-opener.component';
+import { RenderingAreaService } from './rendering-area/services/rendering-area.service';
+import { CompilerService } from './_services/implementations/compiler.service';
+import { CompilerOptionsService } from './_services/implementations/compileroptions.service';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-
         HttpClientModule,
         AppRoutingModule,
         NgbModule,
-        RenderingAreaModule
+        RenderingAreaModule,
+        DFComponentsModule
     ],
     declarations: [
         AppComponent,
@@ -52,7 +54,6 @@ import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-
         EditorComponent,
         TermsOfServicePageComponent,
         InteractiveLogoComponent,
-        TechSelectorComponent,
         PrivacyPageComponent,
         CookieInfoComponent,
         CookiePolicyPageComponent,
@@ -64,10 +65,11 @@ import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-
     bootstrap: [ AppComponent ],
     providers: [ 
         CookieService,
-        TechnologyService, 
-        LiveQueryService,
-        DarkThemeService,  
-        GlobalEventService,
+        TechnologyService,
+        DarkThemeService, 
+        CompilerService,
+        CompilerOptionsService, 
+        RenderingAreaService,
         WebGLHelperService
     ],
     entryComponents: [ InfoModalComponent, CookieInfoComponent ]

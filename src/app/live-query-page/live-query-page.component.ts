@@ -4,6 +4,7 @@ import { DarkThemeService } from '../_services/implementations/darktheme.service
 import { CookieService } from '../_services/implementations/cookie.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieInfoComponent } from '../cookie-info/cookie-info.component';
+import { CompilerOptionsService } from '../_services/implementations/compileroptions.service';
 
 @Component({
     selector: 'app-live-query-page',
@@ -18,7 +19,7 @@ export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
   cookiesAccepted: boolean;
 
-  constructor(darkThemeService: DarkThemeService, cookieService: CookieService, private modalService: NgbModal) {
+  constructor(darkThemeService: DarkThemeService, cookieService: CookieService, private modalService: NgbModal, private compilerOptionsService: CompilerOptionsService) {
 
     this.cookiesAccepted = cookieService.hasAcceptedCookiePolicy();
 
@@ -32,7 +33,9 @@ export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy 
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.compilerOptionsService.compileColumnLevel = true;
+  }
 
   ngAfterViewInit() {
     if(!this.cookiesAccepted)

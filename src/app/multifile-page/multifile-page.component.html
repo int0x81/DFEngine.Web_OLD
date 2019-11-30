@@ -1,6 +1,8 @@
 <div style="display: flex; height: 93vh;">
-    <app-sidebar></app-sidebar>
-    <div style="flex-grow: 1; height: 93vh;">
+    <div style="z-index: 1;">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div style="flex-grow: 1; height: 93vh; z-index: 0;">
         <app-rendering-area></app-rendering-area>
     </div>
 </div>

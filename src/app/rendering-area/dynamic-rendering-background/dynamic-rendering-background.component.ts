@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
 import anime from 'animejs/lib/anime.es.js';
-import { LiveQueryService } from 'src/app/_services/implementations/livequery.service';
+import { RenderingAreaService } from '../services/rendering-area.service';
 
 @Component({
   selector: 'app-dynamic-rendering-background',
@@ -13,7 +13,8 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
 
   darkTheme: boolean;
   private darkThemeSubscription: Subscription;
-  private querySubscription: Subscription;
+  private landscapeSubscription: Subscription;
+  private clearingSubscription: Subscription;
 
   private playing: boolean;
 
@@ -25,21 +26,13 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
 
   cookiesAccepted: boolean;
 
-  constructor(darkThemeService: DarkThemeService, private liveQueryService: LiveQueryService) {
+  constructor(darkThemeService: DarkThemeService, private renderingAreaService: RenderingAreaService) {
 
     this.darkTheme = darkThemeService.getDarkThemeState();
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
 
-    this.querySubscription = this.liveQueryService.newQuerySubject.subscribe(async (query) => {
-
-      if(query.query.length == 0) {
-        if(!this.playing)
-          this.startAnimation();
-      }
-      else
-        this.stopAnimation();
- 
-    });
+    this.landscapeSubscription = this.renderingAreaService.renderLandscapeSubject.subscribe(() => this.stopAnimation());
+    this.clearingSubscription = this.renderingAreaService.clearGRESubject.subscribe(() => this.startAnimation());
   }
 
   ngOnInit() {}
@@ -145,5 +138,7 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
 
   ngOnDestroy() {
     this.darkThemeSubscription.unsubscribe();
+    this.landscapeSubscription.unsubscribe();
+    this.clearingSubscription.unsubscribe();
   }
 }

@@ -36,8 +36,8 @@ export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
             this.update();
         });
 
-        this.newLandscapeSubscription = this.greService.renderGraphSubject.subscribe((rawGraph) => {
-            this.render(rawGraph);
+        this.newLandscapeSubscription = this.greService.renderLandscapeSubject.subscribe((landscape) => {
+            this.render(landscape.graph);
         });
 
         this.clearLandscapeSubscription = this.greService.clearGRESubject.subscribe(() => this.clear());
