@@ -21,8 +21,8 @@
     </div>
     <div class="df-load-button-container">
         <div class="df-file-upload-wrapper">
-            <div class="df-btn">Upload</div>
-            <input type="file" accept=".sql" multiple (change)="uploadFromLocalMachine($event)">
+            <div (click)="fileInput.click()" class="df-btn">Upload</div>
+            <input #fileInput type="file" accept=".sql" multiple (change)="uploadFromLocalMachine($event)" style="display: hidden; width: 0px; height: 0px;">
         </div>
     </div>
 </div>
