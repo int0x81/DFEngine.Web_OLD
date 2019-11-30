@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   darkTheme: boolean;
   private darkThemeSubscription: Subscription;
 
-  constructor(darkThemeService: DarkThemeService, private zone: NgZone) { 
+  constructor(darkThemeService: DarkThemeService) { 
     this.darkTheme = darkThemeService.getDarkThemeState();
 
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => {
@@ -26,9 +26,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   onShowOptionsChange() {
     //render new graph
-    this.zone.run(() => this.showColumns = !this.showColumns);
-    
-    console.log(this.showColumns);
+    this.showColumns = !this.showColumns;
   }
 
   ngOnDestroy() {
