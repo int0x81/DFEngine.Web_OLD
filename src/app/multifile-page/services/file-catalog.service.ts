@@ -73,9 +73,9 @@ export class FileCatalogService {
                                 content: value
                             });
                     });
-                    console.log("Calling API");
+
+                    console.log("Sending: " + this.selectedFiles.size + " files to the server");
                     await compilerService.compile(request).then((landscape) => {
-                      console.log("API responded");
                       renderingService.renderLandscapeSubject.next(landscape);
                     }, () => console.error("Unable to get result from API"));
                     

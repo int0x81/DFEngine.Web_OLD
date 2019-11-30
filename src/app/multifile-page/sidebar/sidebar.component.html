@@ -11,8 +11,8 @@
             <p style="margin: 0px">ColumnLevel</p>
             <div class="df-secondary-toggle">
                 <input type="checkbox" class="df-secondary-check" [checked]="showColumns" (change)="onShowOptionsChange()">
-                <b class="df-secondary-switch"></b>
-                <b class="df-secondary-track"></b>
+                <b [ngClass]="showColumns ? 'df-secondary-switch-on' : 'df-secondary-switch-off'" class="df-secondary-switch"></b>
+                <b [ngClass]="showColumns ? 'df-secondary-track-on' : 'df-secondary-track-off'" class="df-secondary-track"></b>
             </div>
         </div>
     </div>

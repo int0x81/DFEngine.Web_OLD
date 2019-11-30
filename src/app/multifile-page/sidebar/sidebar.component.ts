@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   darkTheme: boolean;
   private darkThemeSubscription: Subscription;
 
-  constructor(darkThemeService: DarkThemeService) { 
+  constructor(darkThemeService: DarkThemeService, private zone: NgZone) { 
     this.darkTheme = darkThemeService.getDarkThemeState();
 
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => {
@@ -26,6 +26,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   onShowOptionsChange() {
     //render new graph
+    this.zone.run(() => this.showColumns = !this.showColumns);
+    
     console.log(this.showColumns);
   }
 
