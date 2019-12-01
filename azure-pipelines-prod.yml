@@ -27,5 +27,5 @@ jobs:
             action: deploy
             namespace: df-prod
             kubernetesServiceConnection: df-prod-df-engine-aks-df-prod-1571077760081
-            manifests: df-web-test.yml  
+            manifests: df-web-prod.yml  
             containers: dfengine.azurecr.io/df-web:prod
