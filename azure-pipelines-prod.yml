@@ -5,14 +5,15 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: Docker@2
-  displayName: Build and push Docker image
-  inputs:
-    containerRegistry: 'DFEngine Docker Registry'
-    repository: 'df-web'
-    command: 'buildAndPush'
-    Dockerfile: 'config/Dockerfile'
-    tags: 'prod'
+
+- script: docker build -t dfengine.azurecr.io/df-web:prod -f config/Dockerfile --build-arg NG_ENVIRONMENT=production .
+  displayName: Building image
+
+- script: docker login -u dfengine -p $(dockerPassword) dfengine.azurecr.io
+  displayName: Login to container registry
+        
+- script: docker push dfengine.azurecr.io/df-web:prod
+  displayName: Pushing image to container registry
 
 - task: KubernetesManifest@0
   displayName: Deploy manifest
