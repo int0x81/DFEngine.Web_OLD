@@ -1,34 +1,24 @@
 trigger:
-
 - master
 
-jobs:
-- deployment:
-  displayName: Build image and apply changes to prod environment
-  pool:
-    vmImage: 'ubuntu-latest'
-  environment: df-prod
-  variables:
-    dockerId: dfengine
-    imageName: df-web
-  strategy:
-    runOnce:
-      deploy:
-        steps:
+pool:
+  vmImage: 'Ubuntu-16.04'
 
-        - task: Docker@2
-          inputs:
-            containerRegistry: 'DFEngine Docker Registry'
-            repository: 'df-web'
-            command: 'buildAndPush'
-            Dockerfile: 'config/Dockerfile'
-            tags: 'prod'
+steps:
+- task: Docker@2
+  displayName: Build and push Docker image
+  inputs:
+    containerRegistry: 'DFEngine Docker Registry'
+    repository: 'df-web'
+    command: 'buildAndPush'
+    Dockerfile: 'config/Dockerfile'
+    tags: 'prod'
 
-        - task: KubernetesManifest@0
-          displayName: Deploy manifest
-          inputs:
-            action: deploy
-            namespace: df-prod
-            kubernetesServiceConnection: df-prod-df-engine-aks-df-prod-1571077760081
-            manifests: df-web-prod.yml  
-            containers: dfengine.azurecr.io/df-web:prod
+- task: KubernetesManifest@0
+  displayName: Deploy manifest
+  inputs:
+    action: deploy
+    namespace: df-prod
+    kubernetesServiceConnection: df-prod-df-engine-aks-df-prod-1571077760081
+    manifests: df-web-prod.yml  
+    containers: dfengine.azurecr.io/df-web:prod
