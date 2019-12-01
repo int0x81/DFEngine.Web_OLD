@@ -15,11 +15,14 @@ jobs:
     runOnce:
       deploy:
         steps:
-        
-        - script: |
-            docker login -u dfengine -p $(dockerPassword) dfengine.azurecr.io
-            docker build -t dfengine.azurecr.io/df-web:prod --build-arg NG_ENVIRONMENT=production .
-            docker push dfengine.azurecr.io/df-web:prod    
+
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'DFEngine Docker Registry'
+            repository: 'df-web'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
+            tags: 'prod'
 
         - task: KubernetesManifest@0
           displayName: Deploy manifest
