@@ -9,7 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FileCatalogComponent } from './sidebar/file-catalog/file-catalog.component';
 import { FileSelectionItemComponent } from './sidebar/file-catalog/file-selection-item/file-selection-item.component';
 import { FileSelectionDirective } from './sidebar/file-catalog/file-selection.directive';
-import { FileCatalogService } from './services/file-catalog.service';
+import { MultiFileService } from './services/multifile.service';
 import { FileProviderService } from './services/file-provider.service';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { FileProviderService } from './services/file-provider.service';
     ],
     bootstrap: [ MultifilePageComponent ],
     providers: [
-        FileCatalogService,
+        MultiFileService,
         FileProviderService
     ],
     entryComponents: [ FileSelectionItemComponent ]

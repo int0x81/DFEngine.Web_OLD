@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SQLFile } from 'src/app/_models/sql-file';
-import { FileCatalogService } from 'src/app/multifile-page/services/file-catalog.service';
+import { MultiFileService } from 'src/app/multifile-page/services/multifile.service';
 
 @Component({
   selector: 'app-file-selection-item',
@@ -12,7 +12,7 @@ export class FileSelectionItemComponent {
 
   selected: boolean = true;
 
-  constructor(private fileCatalogService: FileCatalogService) { }
+  constructor(private fileCatalogService: MultiFileService) { }
 
   onCheckBoxChange() {
     this.selected = !this.selected;

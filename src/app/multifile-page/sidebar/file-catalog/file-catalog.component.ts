@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular
 import { FileSelectionDirective } from './file-selection.directive';
 import { FileSelectionItemComponent } from './file-selection-item/file-selection-item.component';
 import { SQLFile } from 'src/app/_models/sql-file';
-import { FileCatalogService } from '../../services/file-catalog.service';
+import { MultiFileService } from '../../services/multifile.service';
 import { FileProviderService } from '../../services/file-provider.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class FileCatalogComponent implements OnInit {
 
   showPlaceholder: boolean = true;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private fileCatalogService: FileCatalogService, private fileProviderService: FileProviderService) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private multiFileService: MultiFileService, private fileProviderService: FileProviderService) { }
 
   ngOnInit() { }
 
@@ -52,24 +52,6 @@ export class FileCatalogComponent implements OnInit {
   }
 
   /**
-   * Gets all ETL files from Azure DevOps and places them in the catalog
-   */
-  getFilesFromAzureDevOps() {
-
-    this.fileProviderService.getFilesFromAzureDevOps().then((files) => {
-
-      if(files.length > 0)
-        this.showPlaceholder = false;
-      
-      const viewContainerRef = this.fileSelectionHost.viewContainerRef;
-      viewContainerRef.clear();
-
-      for(let file of files)
-        this.addItemToCatalog(file);
-    }, (reason) => console.error("Unable to get files from Azure"));
-  }
-
-  /**
    * Adds a sql file to the catalog
    */
   addItemToCatalog(file: SQLFile) {
@@ -81,6 +63,6 @@ export class FileCatalogComponent implements OnInit {
     const componentRef = viewContainerRef.createComponent(componentFactory);
     (<FileSelectionItemComponent>componentRef.instance).sqlFile = file;
 
-    this.fileCatalogService.selectedFileSubject.next(file);
+    this.multiFileService.selectedFileSubject.next(file);
   }
 }
