@@ -15,15 +15,21 @@ export class PixiRenderer implements IRenderer {
 
         PIXI.utils.skipHello(); //prevents the standart PIXI console output
 
-        this.renderer = new PIXI.Renderer({width: divElement.clientWidth, height: divElement.clientHeight - 6, 
-        transparent: true, resolution: window.devicePixelRatio, autoDensity: true, antialias: true});
+        this.renderer = new PIXI.Renderer({
+            width: divElement.clientWidth, 
+            height: divElement.clientHeight - 6,
+            transparent: true, 
+            resolution: window.devicePixelRatio, 
+            autoDensity: true, 
+            antialias: true});
         
         window.addEventListener('resize', () => {
 
-            let newWidth: number = divElement.clientWidth;
-            let newHeight: number = divElement.clientHeight - 6;
-            
-            this.resize(newWidth, newHeight);
+            let renderingBox = document.getElementById('renderingBox') as HTMLDivElement;
+            let newWidth: number = renderingBox.clientWidth;
+            let newHeight: number = renderingBox.clientHeight - 6;
+            //console.log("New width: " + renderingBox.clientWidth);
+            this.renderer.resize(newWidth, newHeight);
         });
 
         this.viewport = new Viewport({

@@ -1,12 +1,9 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Graph } from "./models/dataObjects/graph";
-import { RenderingTechnology } from "./renderingTechnology";
 import { IRenderer } from "./iRenderer";
-import { D3Renderer } from "./models/renderers/d3Renderer";
 import { PixiRenderer } from "./models/renderers/pixiRenderer";
 import { Subscription } from "rxjs";
 import { DarkThemeService } from '../../_services/implementations/darktheme.service';
-//import { LiveQueryServiceDefinition } from '../_services/livequery.service.def';
 import { RenderingAreaService } from '../services/rendering-area.service';
 
 @Component({ 
@@ -45,11 +42,11 @@ export class GREComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
 
-        let renderingArea = document.getElementById('renderingBox') as HTMLDivElement;
+        let renderingBox = document.getElementById('renderingBox') as HTMLDivElement;
 
         this.graph = new Graph();
         
-        this.renderer = new PixiRenderer(renderingArea);
+        this.renderer = new PixiRenderer(renderingBox);
     }
 
     /**
