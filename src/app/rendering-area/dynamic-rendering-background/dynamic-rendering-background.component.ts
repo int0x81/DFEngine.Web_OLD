@@ -32,7 +32,10 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
 
     this.landscapeSubscription = this.renderingAreaService.renderLandscapeSubject.subscribe(() => this.stopAnimation());
-    this.clearingSubscription = this.renderingAreaService.clearGRESubject.subscribe(() => this.startAnimation());
+    this.clearingSubscription = this.renderingAreaService.clearGRESubject.subscribe(() =>{
+      if(!this.playing)
+        this.startAnimation();
+    });
   }
 
   ngOnInit() {}
