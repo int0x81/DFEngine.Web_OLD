@@ -21,7 +21,7 @@ jobs:
             containerRegistry: 'DFEngine Docker Registry'
             repository: 'df-web'
             command: 'buildAndPush'
-            Dockerfile: './Dockerfile'
+            Dockerfile: 'Dockerfile'
             tags: 'prod'
 
         - task: KubernetesManifest@0
