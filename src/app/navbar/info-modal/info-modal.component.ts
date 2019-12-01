@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } fr
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
 import * as hljs from 'highlight.js';
-import * as sqlSyntax from 'highlight.js/lib/languages/SQL';
 
 @Component({
   selector: 'app-info-modal',

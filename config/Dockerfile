@@ -5,8 +5,8 @@ WORKDIR /app
 ARG NG_ENVIRONMENT
 
 COPY . /app
-RUN npm install
-RUN npm install -g @angular/cli@7.3.9
+RUN npm i
+RUN npm i -g @angular/cli
 
 RUN ng build -c ${NG_ENVIRONMENT}
 
