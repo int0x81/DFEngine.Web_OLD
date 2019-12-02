@@ -6,7 +6,7 @@ pool:
 
 steps:
 
-- script: docker build -t dfengine.azurecr.io/df-web:prod -f config/Dockerfile --build-arg NG_ENVIRONMENT=test .
+- script: docker build -t dfengine.azurecr.io/df-web:test -f config/Dockerfile --build-arg NG_ENVIRONMENT=test .
   displayName: Building image
 
 - script: docker login -u dfengine -p $(dockerPassword) dfengine.azurecr.io
