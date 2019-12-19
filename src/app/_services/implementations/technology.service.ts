@@ -3,9 +3,10 @@ import * as localForage from 'localforage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TechnologyServiceDefinition } from '../technology.service.def';
 import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class TechnologyService implements TechnologyServiceDefinition {
-    
 
     readonly db: LocalForage;
 
@@ -16,7 +17,7 @@ export class TechnologyService implements TechnologyServiceDefinition {
         });
     }
 
-    loadTechnologies(): Promise<void> {
+    async loadTechnologies(): Promise<void> {
 
         const httpOptions = {
             headers: new HttpHeaders({

@@ -19,7 +19,6 @@ import { TermsOfServicePageComponent } from './terms-of-service-page/terms-of-se
 import { DarkThemeService } from './_services/implementations/darktheme.service';
 import { InteractiveLogoComponent } from './navbar/interactive-logo/interactive-logo.component';
 import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
-import { TechnologyService } from './_services/implementations/technology.service';
 import { CookieInfoComponent } from './cookie-info/cookie-info.component';
 import { CookieService } from './_services/implementations/cookie.service';
 import { CookiePolicyPageComponent } from './cookie-policy-page/cookie-policy-page.component';
@@ -65,7 +64,6 @@ import { CompilerOptionsService } from './_services/implementations/compileropti
     bootstrap: [ AppComponent ],
     providers: [ 
         CookieService,
-        TechnologyService,
         DarkThemeService, 
         CompilerService,
         CompilerOptionsService, 

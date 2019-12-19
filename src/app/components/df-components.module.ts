@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechSelectorComponent } from './tech-selector/tech-selector.component';
+import { TechnologyMock } from '../_services/mocks/technology.service.mock';
+import { TechnologyService } from '../_services/implementations/technology.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -13,7 +16,7 @@ import { TechSelectorComponent } from './tech-selector/tech-selector.component';
         TechSelectorComponent
     ],
     bootstrap: [],
-    providers: [],
+    providers: [ TechnologyService ],
     entryComponents: [ ]
 })
 /**
