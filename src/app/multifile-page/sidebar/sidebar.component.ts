@@ -22,6 +22,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => {
       this.darkTheme = !this.darkTheme;
     });
+
+    this.compilerOptionsService.compileColumnLevel = this.showColumns;
   }
 
   ngOnInit() {

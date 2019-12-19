@@ -49,6 +49,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.breakpointSubscription = breakpointObserver.observe('(max-width: ' + this.SM_DEVICE_WIDTH + 'px)')
         .subscribe(result => this.smDevice = result.matches);
 
+    this.compilerOptionsService.compileColumnLevel = true;
   }
 
   async ngOnInit() {}
