@@ -53,16 +53,16 @@ export class DynamicRenderingBackgroundComponent implements OnInit, AfterViewIni
 
   private startAnimation() {
 
-    this.playing = true;
+    // this.playing = true;
 
-    this.playAnimationTimeline(this.pathOne);
-    this.playAnimationTimeline(this.pathTwo);
-    this.playAnimationTimeline(this.pathFour);
-    this.playAnimationTimeline(this.pathFive);
+    // this.playAnimationTimeline(this.pathOne);
+    // this.playAnimationTimeline(this.pathTwo);
+    // this.playAnimationTimeline(this.pathFour);
+    // this.playAnimationTimeline(this.pathFive);
 
-    setTimeout(() => {
-      this.playAnimationTimeline(this.pathThree);
-    }, 4000);
+    // setTimeout(() => {
+    //   this.playAnimationTimeline(this.pathThree);
+    // }, 4000);
   }
 
   private stopAnimation() {

@@ -31,7 +31,7 @@
     "highlight.js": "^9.17.1",
     "localforage": "^1.7.3",
     "noty": "^3.2.0-beta",
-    "pixi-viewport": "^4.4.1",
+    "pixi-viewport": "^4.3.3",
     "pixi.js": "^5.2.0",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",

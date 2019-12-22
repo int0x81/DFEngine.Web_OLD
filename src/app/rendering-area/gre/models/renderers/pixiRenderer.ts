@@ -1,40 +1,43 @@
 import { IRenderer } from "../../iRenderer";
 import { Graph } from "../dataObjects/graph";
 import * as PIXI from "pixi.js";
-import { Viewport } from 'pixi-viewport'
+import { Viewport } from 'pixi-viewport';
 
 export class PixiRenderer implements IRenderer {
 
-    private renderer: PIXI.Renderer;
-
-    private ticker: PIXI.Ticker = new PIXI.Ticker();
+    private application: PIXI.Application;
 
     private viewport: Viewport;
 
     constructor(divElement: HTMLDivElement) {
 
-        PIXI.utils.skipHello(); //prevents the standart PIXI console output
-
-        this.renderer = new PIXI.Renderer({
+        this.application = new PIXI.Application({
             width: divElement.clientWidth, 
             height: divElement.clientHeight - 6,
             transparent: true, 
             resolution: window.devicePixelRatio, 
-            autoDensity: true, 
-            antialias: true});
+            autoDensity: true,
+            antialias: true
+        });
+
+        PIXI.utils.skipHello(); //prevents the standart PIXI console output
         
+        divElement.appendChild(this.application.view);
         window.addEventListener('resize', () => {
 
             let renderingBox = document.getElementById('renderingBox') as HTMLDivElement;
             let newWidth: number = renderingBox.clientWidth;
             let newHeight: number = renderingBox.clientHeight - 6;
-            //console.log("New width: " + renderingBox.clientWidth);
-            this.renderer.resize(newWidth, newHeight);
+            this.application.renderer.resize(newWidth, newHeight);
         });
 
         this.viewport = new Viewport({
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight, 
+            worldWidth: divElement.clientWidth, 
+            worldHeight: divElement.clientHeight - 6,
             divWheel: divElement,
-            interaction: this.renderer.plugins.interaction
+            interaction: this.application.renderer.plugins.interaction
         });
 
         this.viewport
@@ -44,9 +47,7 @@ export class PixiRenderer implements IRenderer {
         .wheel({
             percent: 0.1,
             smooth: 5,
-        });
-        
-        divElement.appendChild(this.renderer.view);
+        }); 
     }
 
     render(graph: Graph, darkTheme: boolean): void {
@@ -57,11 +58,7 @@ export class PixiRenderer implements IRenderer {
         graph.renderWebGL(graphContainer, darkTheme);
 
         this.viewport.addChild(graphContainer);
-
-        this.ticker.stop();
-        this.ticker = new PIXI.Ticker();
-        this.ticker.add(() => this.renderer.render(this.viewport));
-        this.ticker.start();
+        this.application.stage.addChild(this.viewport);
     }
 
     update(graph: Graph, darkTheme: boolean): void {
@@ -72,25 +69,17 @@ export class PixiRenderer implements IRenderer {
         graph.updateWebGL(graphContainer, darkTheme);
         
         this.viewport.addChild(graphContainer);
-
-        this.ticker.stop();
-        this.ticker = new PIXI.Ticker();
-        this.ticker.add(() => this.renderer.render(this.viewport));
-        this.ticker.start();
+        this.application.stage.addChild(this.viewport);
     }
 
     clear(): void {
 
-        this.renderer.clear();
+        //this.application.stage.removeChildren();
         this.viewport.removeChildren();
-        this.ticker.stop();
-        this.ticker = new PIXI.Ticker();
-        this.ticker.add(() => this.renderer.render(this.viewport));
-        this.ticker.start();
     }
 
     resize(width: number, height: number): void {
 
-        this.renderer.resize(width, height);
+        this.application.renderer.resize(width, height);
     }
 }

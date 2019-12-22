@@ -1,6 +1,5 @@
 import { Graphics } from "pixi.js";
 import { Constants } from "../../../helpers/constants";
-import { pathToFileURL } from "url";
 
 export class PixiEdge {
 

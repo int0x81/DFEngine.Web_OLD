@@ -9,7 +9,6 @@ export class PixiNode {
          x: number, y: number, width: number, height: number, z_index: number, darkTheme: boolean) {
 
         let rect = new PIXI.Graphics();
-        //let rect = new PIXI.RoundedRectangle();
 
         let color: number = this.computeColor(z_index, darkTheme);
         let borderRadius: number = this.computeBorderRadius(z_index);
