@@ -5,6 +5,7 @@ import { GREComponent } from './gre/gre.component';
 import { RenderingAreaService } from './services/rendering-area.service';
 import { RenderingAreaComponent } from './rendering-area.component';
 import { CommonModule } from '@angular/common';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
         RenderingAreaComponent,
         StatusLogoComponent,
         DynamicRenderingBackgroundComponent,
-        GREComponent
+        GREComponent,
+        SearchBarComponent
     ],
     exports: [
         RenderingAreaComponent
