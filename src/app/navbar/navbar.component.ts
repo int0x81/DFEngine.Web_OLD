@@ -9,7 +9,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  private readonly SM_DEVICE_WIDTH: number = 668;
+  private readonly SM_DEVICE_WIDTH: number = 738;
 
   private breakpointSubscription: Subscription;
   smDevice: boolean;
