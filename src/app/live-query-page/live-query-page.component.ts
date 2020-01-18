@@ -38,8 +38,8 @@ export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit() {
-    if(!this.cookiesAccepted)
-    this.modalService.open(CookieInfoComponent);
+    // if(!this.cookiesAccepted)
+    //     this.modalService.open(CookieInfoComponent);
   }
 
   ngOnDestroy(): void {
