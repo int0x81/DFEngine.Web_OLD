@@ -13,7 +13,6 @@ import { LiveQueryPageComponent } from './live-query-page/live-query-page.compon
 import { NavbarComponent } from './navbar/navbar.component';
 import { DarkmodeToggleComponent } from './navbar/darkmode-toggle/darkmode-toggle.component';
 import { AdBannerComponent } from './live-query-page/ad-banner/ad-banner.component';
-import { CreditComponent } from './live-query-page/credit/credit.component';
 import { EditorComponent } from './live-query-page/editor/editor.component';
 import { TermsOfServicePageComponent } from './terms-of-service-page/terms-of-service-page.component';
 import { DarkThemeService } from './_services/implementations/darktheme.service';
@@ -49,7 +48,6 @@ import { CompilerOptionsService } from './_services/implementations/compileropti
         NavbarComponent,
         DarkmodeToggleComponent,
         AdBannerComponent,
-        CreditComponent,
         EditorComponent,
         TermsOfServicePageComponent,
         InteractiveLogoComponent,

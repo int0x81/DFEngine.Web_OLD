@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { TechSelectorComponent } from './tech-selector/tech-selector.component';
 import { TechnologyMock } from '../_services/mocks/technology.service.mock';
 import { TechnologyService } from '../_services/implementations/technology.service';
-import { HttpClientModule } from '@angular/common/http';
+import { CreditComponent } from './credit/credit.component';
 
 @NgModule({
     imports: [
         CommonModule
     ],
     declarations: [
-        TechSelectorComponent
+        TechSelectorComponent,
+        CreditComponent
     ],
     exports: [
-        TechSelectorComponent
+        TechSelectorComponent,
+        CreditComponent
     ],
     bootstrap: [],
     providers: [ TechnologyService ],
