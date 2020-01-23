@@ -1,5 +1,5 @@
 <div class="df-file-catalog">
-    <div class="df-file-selection-wrapper">
+    <div [ngClass]="darkTheme ? 'df-file-selection-wrapper-dt' : 'df-file-selection-wrapper-ct'" class="df-file-selection-wrapper">
         <div class="df-file-selection">
             <ng-template file-selection-host></ng-template>
         </div>
@@ -16,7 +16,7 @@
                     <circle style="fill:#FFFFFF;" cx="38.5" cy="47" r="3" />
                 </g>
             </svg>
-            <p>Select files</p>
+            <p [ngClass]="darkTheme ? 'df-file-selection-placeholder-dt' : 'df-file-selection-placeholder-ct'">Select files</p>
         </div>
     </div>
     <div class="df-load-button-container">

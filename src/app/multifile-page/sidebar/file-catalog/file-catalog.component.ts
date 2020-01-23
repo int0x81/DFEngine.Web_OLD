@@ -1,21 +1,31 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
 import { FileSelectionDirective } from './file-selection.directive';
 import { FileSelectionItemComponent } from './file-selection-item/file-selection-item.component';
 import { SQLFile } from 'src/app/_models/sql-file';
 import { MultiFileService } from '../../services/multifile.service';
 import { FileProviderService } from '../../services/file-provider.service';
+import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-file-catalog',
   templateUrl: './file-catalog.component.html',
   styleUrls: ['./file-catalog.component.sass']
 })
-export class FileCatalogComponent implements OnInit {
+export class FileCatalogComponent implements OnInit, OnDestroy {
   @ViewChild(FileSelectionDirective, { static: true }) fileSelectionHost: FileSelectionDirective;
 
   showPlaceholder: boolean = true;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private multiFileService: MultiFileService, private fileProviderService: FileProviderService) { }
+  public darkTheme: boolean;
+  private darkThemeSubscription: Subscription;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private multiFileService: MultiFileService, private fileProviderService: FileProviderService, 
+    private darkThemeService: DarkThemeService) {
+
+      this.darkTheme = darkThemeService.getDarkThemeState();
+      this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
+  }
 
   ngOnInit() { }
 
@@ -64,5 +74,9 @@ export class FileCatalogComponent implements OnInit {
     (<FileSelectionItemComponent>componentRef.instance).sqlFile = file;
 
     this.multiFileService.selectedFileSubject.next(file);
+  }
+
+  ngOnDestroy() {
+    this.darkThemeSubscription.unsubscribe();
   }
 }
