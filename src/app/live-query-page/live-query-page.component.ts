@@ -5,6 +5,7 @@ import { CookieService } from '../_services/implementations/cookie.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieInfoComponent } from '../cookie-info/cookie-info.component';
 import { CompilerOptionsService } from '../_services/implementations/compileroptions.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
     selector: 'app-live-query-page',
@@ -12,14 +13,20 @@ import { CompilerOptionsService } from '../_services/implementations/compileropt
     styleUrls: ['./live-query-page.component.sass']
   })
 export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private readonly SM_DEVICE_WIDTH: number = 668;
   
   private darkTheme: boolean;
   private darkThemeSubscription: Subscription;
   private cookieAcceptSubscription: Subscription;
 
+  private breakpointSubscription: Subscription;
+
+  smDevice: boolean;
+
   cookiesAccepted: boolean;
 
-  constructor(darkThemeService: DarkThemeService, cookieService: CookieService, private modalService: NgbModal, private compilerOptionsService: CompilerOptionsService) {
+  constructor(darkThemeService: DarkThemeService, cookieService: CookieService, private modalService: NgbModal, private compilerOptionsService: CompilerOptionsService, breakpointObserver: BreakpointObserver) {
 
     this.cookiesAccepted = cookieService.hasAcceptedCookiePolicy();
 
@@ -28,6 +35,10 @@ export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy 
           this.cookiesAccepted = true;
         });
     }
+
+    this.smDevice = breakpointObserver.isMatched('(max-width: ' + this.SM_DEVICE_WIDTH + 'px)');
+      this.breakpointSubscription = breakpointObserver.observe('(max-width: ' + this.SM_DEVICE_WIDTH + 'px)')
+        .subscribe(result => this.smDevice = result.matches);
 
     this.darkTheme = darkThemeService.getDarkThemeState();
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
@@ -47,5 +58,6 @@ export class LiveQueryPageComponent implements OnInit, AfterViewInit, OnDestroy 
     this.darkThemeSubscription.unsubscribe();
     if(this.cookieAcceptSubscription != null && this.cookieAcceptSubscription != undefined)
       this.cookieAcceptSubscription.unsubscribe();
+      this.breakpointSubscription.unsubscribe();
   }
 }
