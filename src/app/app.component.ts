@@ -1,36 +1,24 @@
-import { Component, OnInit, OnDestroy, NgZone, AfterViewInit } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout'
-import { Observable, Subscription } from 'rxjs';
-import { DarkThemeService } from './_services/implementations/darktheme.service';
-import { CookieService } from './_services/implementations/cookie.service';
-import { GlobalEventService } from './_services/implementations/globalevent.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CookieInfoComponent } from './cookie-info/cookie-info.component';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MobileNavbarService } from './_services/implementations/mobilenavbar.service';
 
 @Component({ 
     selector: 'app-root', 
     templateUrl: 'app.component.html',
     styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnDestroy {
 
-    private layoutChangeSubscription: Subscription;
-    private darkThemeSubscription: Subscription;
+    private mobileNavSubscription: Subscription;
+    mobileNavOpen: boolean = false;
 
-    cookiesAccepted: boolean;
-    darkTheme: boolean;
-
-    constructor(darkThemeService: DarkThemeService) {
-
-        this.darkTheme = darkThemeService.getDarkThemeState();
-        this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
-    }
-
-    ngOnInit(): void { }
+    constructor(mobileNavbarService: MobileNavbarService) {
+        this.mobileNavSubscription = mobileNavbarService.mobileNavToggleSubject.subscribe(() => {
+            this.mobileNavOpen = !this.mobileNavOpen;
+        });
+     }
 
     ngOnDestroy(): void {
-
-        this.layoutChangeSubscription.unsubscribe();
-        this.darkThemeSubscription.unsubscribe();
+        this.mobileNavSubscription.unsubscribe();
     }
 }

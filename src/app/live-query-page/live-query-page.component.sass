@@ -1,20 +1,39 @@
 .df-live-query-page
     display: flex
     flex-direction: column
-    height: 93vh
+    height: 100%
+    width: 100vw
 
-.df-editor-area
+.df-livequery-bottom-section
+    display: flex
     border-top-style: solid
     border-top-width: 3px
     border-top-color: #121212
     justify-self: flex-end
 
-.rendering-area-wrapper
+.df-livequery-bottom-section-sm
+    flex-direction: column
+
+.df-editor-wrapper
+    flex-grow: 1
+
+.df-editor-wrapper-sm
+    border-bottom-width: 2px
+    border-bottom-style: solid
+    border-bottom-color: #000000
+
+.df-editor-wrapper-lg
+    border-right-width: 2px
+    border-right-style: solid
+    border-right-color: #000000
+
+.df-ad-credit-area
+    display: flex
+    flex-direction: column
+
+.df-ad-wrapper
+    flex-grow: 1
+
+.df-rendering-area-wrapper
     flex-grow: 1
     min-height: 50vh
-
-.editor-area-classictheme
-    background-color: #808080
-
-.start-up-mode
-    filter: blur(8px)

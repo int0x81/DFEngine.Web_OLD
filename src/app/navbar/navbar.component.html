@@ -1,12 +1,14 @@
-<div class="d-flex justify-content-between df-nav">
+<div class="df-nav">
 
-    <div class="d-flex ml-3 align-items-center">
-      <app-interactive-logo></app-interactive-logo>
+    <div class="df-nav-left-section">
+      <div class="df-nav-logo-wrapper">
+        <app-interactive-logo></app-interactive-logo>
+      </div>
       <div class="df-nav-item-between df-nav-header-container">
         <p class="df-nav-header-main">DFEngine</p>
-        <!-- <p class="df-nav-header-info">- the SQL visualization tool</p> -->
+        <p class="df-nav-header-info">- SQL visualization</p>
       </div>
-      <div *ngIf="!smDevice" class="d-flex align-items-center justify-content-beginn df-nav-item-group">
+      <div *ngIf="!smDevice" class="df-nav-item-group">
         <div class="df-nav-item-begin">
           <a class="df-nav-link" routerLink="/livequery" routerLinkActive="df-link-active">LiveQuery</a>
         </div>
@@ -16,7 +18,7 @@
       </div>
     </div>
 
-    <div *ngIf="!smDevice" class="d-flex align-items-center df-nav-item-group">
+    <div *ngIf="!smDevice" class="df-nav-item-group">
       <div class="df-nav-item-begin">
         <app-darkmode-toggle></app-darkmode-toggle>
       </div>

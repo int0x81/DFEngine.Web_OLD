@@ -30,24 +30,15 @@ export class EditorComponent implements OnInit, OnDestroy {
   // with the update call to trigger trigger
   private readonly UPDATE_TRESHHOLD: number = 1100;
 
-  private readonly SM_DEVICE_WIDTH: number = 668;
-
-  private breakpointSubscription: Subscription;
-  smDevice: boolean;
-
   textEditorContent: string = ""
   private isWriting: boolean = false;
   private lastChange: number = null; //milliseconds
 
   constructor(compilerServiceImpl: CompilerService, private compilerOptionsService: CompilerOptionsService, darkThemeService: DarkThemeService, 
-    private renderingAreaService: RenderingAreaService, breakpointObserver: BreakpointObserver) {
+    private renderingAreaService: RenderingAreaService) {
     this.compilerService = compilerServiceImpl;
     this.darkTheme = darkThemeService.getDarkThemeState();
     this.darkThemeSubscription = darkThemeService.darkThemeSubject.subscribe(() => this.darkTheme = !this.darkTheme);
-
-    this.smDevice = breakpointObserver.isMatched('(max-width: ' + this.SM_DEVICE_WIDTH + 'px)');
-      this.breakpointSubscription = breakpointObserver.observe('(max-width: ' + this.SM_DEVICE_WIDTH + 'px)')
-        .subscribe(result => this.smDevice = result.matches);
 
     this.compilerOptionsService.compileColumnLevel = true;
   }
@@ -58,7 +49,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     
     this.lastChange = new Date().getSeconds() * 1000 + new Date().getMilliseconds();
 
-    if(this.isWriting)
+    if(this.isWriting) //TODO: CHECK THAT TECHNOLOGIES HAVE BEEN LOADED
       return;
     else {
       this.isWriting = true;
@@ -97,6 +88,5 @@ export class EditorComponent implements OnInit, OnDestroy {
     
   ngOnDestroy() {
     this.darkThemeSubscription.unsubscribe();
-    this.breakpointSubscription.unsubscribe();
   }
 }

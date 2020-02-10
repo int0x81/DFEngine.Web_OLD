@@ -25,6 +25,10 @@ export class DarkThemeService {
     }
 
     private getDarkThemePreferences(): boolean {
-        return true;
+        
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches)
+            return true;
+        else
+            return false;
     }
 }

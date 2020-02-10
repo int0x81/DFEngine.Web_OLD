@@ -1,14 +1,16 @@
-<div [ngClass]="cookiesAccepted ? '' : 'start-up-mode'" class="df-live-query-page">
-    <div class="rendering-area-wrapper">
+<div class="df-live-query-page">
+    <div class="df-rendering-area-wrapper">
         <app-rendering-area></app-rendering-area>
     </div>
-    <div class="darktheme-bg-dp2 df-editor-area">
-        <div class="d-lg-flex align-items-end m-0">
-            <div style="flex-grow: 1;">
-                <app-editor></app-editor>
-            </div>
-            <div class="p-0 m-0">
+    <div class="darktheme-bg-dp2 df-livequery-bottom-section" [ngClass]="smDevice ? 'df-livequery-bottom-section-sm' : ''">
+        <div class="df-editor-wrapper" [ngClass]="smDevice ? 'df-editor-wrapper-sm' : 'df-editor-wrapper-lg'">
+            <app-editor></app-editor>
+        </div>
+        <div class="df-ad-credit-area">
+            <div class="df-ad-wrapper">
                 <app-ad-banner></app-ad-banner>
+            </div>
+            <div>
                 <app-credit></app-credit>
             </div>
         </div>

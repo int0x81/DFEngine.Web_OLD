@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { TechnologyServiceDefinition } from 'src/app/_services/technology.service.def';
 import { Technology } from 'src/app/_models/technology';
 import { TechnologyMock } from 'src/app/_services/mocks/technology.service.mock';
-import { GlobalEventService } from 'src/app/_services/implementations/globalevent.service';
 import { DarkThemeService } from 'src/app/_services/implementations/darktheme.service';
 import { Subscription } from 'rxjs';
 import { TechnologyService } from 'src/app/_services/implementations/technology.service';

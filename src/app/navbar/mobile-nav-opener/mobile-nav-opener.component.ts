@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MobileNavbarService } from 'src/app/_services/implementations/mobilenavbar.service';
 
 @Component({
   selector: 'app-mobile-nav-opener',
   templateUrl: './mobile-nav-opener.component.html',
   styleUrls: ['./mobile-nav-opener.component.sass']
 })
-export class MobileNavOpenerComponent implements OnInit {
+export class MobileNavOpenerComponent {
 
-  constructor() { }
+  mobileNavOpen: boolean = false;
 
-  ngOnInit() {
-  }
+  constructor(private mobileNavbarService: MobileNavbarService) { }
 
   onClick() {
-
+    this.mobileNavOpen = !this.mobileNavOpen;
+    this.mobileNavbarService.mobileNavToggleSubject.next();
   }
 }
