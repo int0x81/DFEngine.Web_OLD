@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DarkThemeService } from '../_services/implementations/darktheme.service';
 import { CookieService } from '../_services/implementations/cookie.service';

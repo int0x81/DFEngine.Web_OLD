@@ -1,8 +1,11 @@
-<div style="display:flex; flex-direction: column; align-self: stretch;">
-    <div style="z-index: 2;">
+<div class="df-app">
+    <div class="df-nav-wrapper">
         <app-navbar></app-navbar>
     </div>
-    <div [ngClass]="darkTheme ? 'darktheme-bg-dp0' : ''" style="display: flex; flex-direction: column; flex-grow: 1;">
+    <div class="df-page-wrapper">
+        <div [ngClass]="mobileNavOpen ? '' : 'df-mobile-nav-wrapper-closed'" class="df-mobile-nav-wrapper">
+            <app-mobile-nav></app-mobile-nav>
+        </div>
         <router-outlet></router-outlet>
     </div>
 </div>

@@ -14,10 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DarkmodeToggleComponent } from './navbar/darkmode-toggle/darkmode-toggle.component';
 import { AdBannerComponent } from './live-query-page/ad-banner/ad-banner.component';
 import { EditorComponent } from './live-query-page/editor/editor.component';
-import { TermsOfServicePageComponent } from './terms-of-service-page/terms-of-service-page.component';
 import { DarkThemeService } from './_services/implementations/darktheme.service';
 import { InteractiveLogoComponent } from './navbar/interactive-logo/interactive-logo.component';
-import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 import { CookieInfoComponent } from './cookie-info/cookie-info.component';
 import { CookieService } from './_services/implementations/cookie.service';
 import { CookiePolicyPageComponent } from './cookie-policy-page/cookie-policy-page.component';
@@ -29,6 +27,8 @@ import { MobileNavOpenerComponent } from './navbar/mobile-nav-opener/mobile-nav-
 import { RenderingAreaService } from './rendering-area/services/rendering-area.service';
 import { CompilerService } from './_services/implementations/compiler.service';
 import { CompilerOptionsService } from './_services/implementations/compileroptions.service';
+import { MobileNavComponent } from './navbar/mobile-nav/mobile-nav.component';
+import { MobileNavbarService } from './_services/implementations/mobilenavbar.service';
 
 @NgModule({
     imports: [
@@ -49,18 +49,18 @@ import { CompilerOptionsService } from './_services/implementations/compileropti
         DarkmodeToggleComponent,
         AdBannerComponent,
         EditorComponent,
-        TermsOfServicePageComponent,
         InteractiveLogoComponent,
-        PrivacyPageComponent,
         CookieInfoComponent,
         CookiePolicyPageComponent,
         InfoButtonComponent,
         InfoModalComponent,
         GitHubButtonComponent,
         MobileNavOpenerComponent,
+        MobileNavComponent,
     ],
     bootstrap: [ AppComponent ],
     providers: [ 
+        MobileNavbarService,
         CookieService,
         DarkThemeService, 
         CompilerService,

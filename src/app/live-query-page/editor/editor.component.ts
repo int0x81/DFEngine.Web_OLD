@@ -49,7 +49,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     
     this.lastChange = new Date().getSeconds() * 1000 + new Date().getMilliseconds();
 
-    if(this.isWriting)
+    if(this.isWriting) //TODO: CHECK THAT TECHNOLOGIES HAVE BEEN LOADED
       return;
     else {
       this.isWriting = true;
